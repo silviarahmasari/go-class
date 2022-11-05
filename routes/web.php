@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +41,9 @@ Route::get('register', function () {
 Route::get('/', function () {
     return view('dashboard');
 });
+
+Route::get('/users', [UsersController::class, 'index'])->name('users.index');
+Route::get('/users/create', [UsersController::class, 'create'])->name('users.create');
+Route::post('/users/store', [UsersController::class, 'store'])->name('users.store');
+Route::get('/users/show', [UsersController::class, 'show'])->name('users.show');
+Route::get('/users/update', [UsersController::class, 'update'])->name('users.update');
