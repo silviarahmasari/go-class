@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layout/mainlayout');
-});
+// Route::get('/', function () {
+//     return view('layout/mainlayout');
+// });
 
 Route::get('welcome', function () {
     return view('welcome');
@@ -35,4 +35,8 @@ Route::get('services', function () {
 
 Route::get('register', function () {
     return view('register');
+});
+
+Route::get('/', function () {
+    return view('dashboard');
 });
