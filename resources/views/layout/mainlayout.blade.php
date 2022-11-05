@@ -18,15 +18,14 @@
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
-          @yield('content')
+          <div class="row justify-content-center">
+            @yield('content')
+          </div>
           <div class="section-body">
-          
             @yield('script')
-          
         </section>
       </div>
       </div>
-      @include('layout/footer')
     </div>
   </div>
 
