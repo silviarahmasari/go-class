@@ -18,13 +18,11 @@
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
-          <div class="row justify-content-center">
             @yield('content')
-          </div>
           <div class="section-body">
             @yield('script')
+          </div>
         </section>
-      </div>
       </div>
     </div>
   </div>

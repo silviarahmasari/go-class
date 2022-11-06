@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\ClassesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +23,9 @@ Route::get('welcome', function () {
     return view('welcome');
 });
 
-Route::get('login', function () {
-    return view('login');
-});
+// Route::get('login', function () {
+//     return view('login');
+// });
 
 Route::get('about', function () {
     return view('about');
@@ -40,3 +42,16 @@ Route::get('register', function () {
 Route::get('/', function () {
     return view('dashboard');
 });
+
+Route::get('/login', [UsersController::class, 'index'])->name('login');
+Route::post('/authenticate', [UsersController::class, 'authenticate'])->name('authenticate');
+Route::get('/logout', [UsersController::class, 'logout'])->name('logout');
+
+
+Route::get('class/index', [ClassesController::class, 'index'])->name('classes.index');
+Route::get('class/create', [ClassesController::class, 'create'])->name('classes.create');
+Route::post('class/store', [ClassesController::class, 'store'])->name('classes.store');
+Route::get('class/show/{id}', [ClassesController::class, 'show'])->name('classes.show');
+Route::get('class/edit/{id}', [ClassesController::class, 'edit'])->name('classes.edit');
+Route::post('class/update/{id}', [ClassesController::class, 'update'])->name('classes.update');
+Route::get('class/destroy/{id}', [ClassesController::class, 'destroy'])->name('classes.destroy');

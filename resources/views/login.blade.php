@@ -15,31 +15,33 @@
                   <h4 class="mt-1 mb-5 pb-1">Selamat Datang Di GoClass</h4>
                 </div>
 
-                <form>
+                <form action="{{ route('authenticate') }}" method="POST">
+                  @csrf
                   <p>Please login to your account</p>
 
                   <div class="form-outline mb-4">
-                    <input type="email" id="form2Example11" class="form-control"
-                      placeholder="Phone number or email address" />
-                    <label class="form-label" for="form2Example11">Username</label>
+                    <label class="form-label" for="form2Example11">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="Email" />
                   </div>
 
                   <div class="form-outline mb-4">
-                    <input type="password" id="form2Example22" class="form-control" />
                     <label class="form-label" for="form2Example22">Password</label>
+                    <input type="password" id="password" name="password"  class="form-control" placeholder="Password" />
                   </div>
 
-                  <div class="text-center pt-1 mb-5 pb-1">
+                  {{-- <div class="text-center pt-1 mb-5 pb-1">
                     <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button">Log
                       in</button>
                     <a class="text-muted" href="#!">Forgot password?</a>
+                  </div> --}}
+
+                  <div class="d-flex align-items-center justify-content-center pb-4">
+                    <p class="mb-0 me-2">Don't have an account?</p>&nbsp;
+                    <a href="/register" type="button" class="btn btn-outline-danger">Create new</a>
                   </div>
 
                   <div class="d-flex align-items-center justify-content-center pb-4">
-                    <p class="mb-0 me-2">Don't have an account?</p>
-                    <a href="/register" type="button" class="btn btn-outline-danger">Create new</a>
-                  
-                    
+                    <button class="btn btn-success">Login</button>
                   </div>
 
                 </form>
