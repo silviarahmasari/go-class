@@ -7,7 +7,7 @@
   <title>Register</title>
 </head>
 <body>
-  <section style="background-color: #043c6d;">
+  <section style="background-color: #30348b;">
     <div class="container p-5">
       <div class="row d-flex justify-content-center align-items-center">
         <div class="col-lg-8 col-xl-6">

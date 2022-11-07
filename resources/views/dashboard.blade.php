@@ -1,6 +1,7 @@
 @extends('layout.mainlayout')
 @section('title','Kelas')
 @section('PWBF','')
+@section('auth', $user->name)
 
 @section('content')
 <style>

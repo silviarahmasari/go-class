@@ -35,7 +35,7 @@
                     </div>
                     <div class="form-group">
                         <label>Class Description</label>
-                        <textarea name="class_desc" id="class_desc" class="summernote-simple" style="display: none;"></textarea>
+                        <textarea name="class_desc" class="form-control" style="height: auto; width:100%;" id="class_desc" style="display: none;"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Class Status</label>

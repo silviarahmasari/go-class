@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Users;
-use App\Models\Classes;
+use Illuminate\Support\Facades\Hash;
 
-class HomeController extends Controller
+class RegisterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +15,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = Users::where('id_user', '=', session('LoggedUser'))->first();
-        $class = Classes::all();
-
-        return view('dashboard', compact('class', 'user'));
+        return view('register');
     }
 
     /**
@@ -40,7 +36,14 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $users = new Users;
+        $users->name = $request->name;
+        $users->email = $request->email;
+        $users->password = $request->password;
+        // $users->password = Hash::make($request->password);
+        $users->save();
+
+        return redirect('login')->with('success', 'Registration Success');
     }
 
     /**
@@ -86,5 +89,24 @@ class HomeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function register_action(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'username' => 'required|unique:tb_user',
+            'password' => 'required',
+            'password_confirm' => 'required|same:password',
+        ]);
+
+        $user = new Users([
+            'name'      => $request->name,
+            'username'  => $request->username,
+            'password'  => Hash::make($request->password),
+        ]);
+        $user->save();
+
+        return redirect()->route('login')->with('success', 'Registration success. Please login!');
     }
 }
