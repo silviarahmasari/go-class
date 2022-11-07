@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Users;
 use Illuminate\Http\Request;
+<<<<<<< HEAD
+=======
+use Illuminate\Support\Facades\Hash;
+// use Illuminate\Support\Facades\Auth;
+>>>>>>> 2f6d77e9c994f75a606bd53e29e1d3f939ff399f
 
 class UsersController extends Controller
 {
@@ -14,9 +19,13 @@ class UsersController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
         $users = Users::all();
 
         return view('users.index', compact('users'));
+=======
+        return view('login');
+>>>>>>> 2f6d77e9c994f75a606bd53e29e1d3f939ff399f
     }
 
     /**
@@ -26,7 +35,11 @@ class UsersController extends Controller
      */
     public function create()
     {
+<<<<<<< HEAD
         return view('users.create');
+=======
+        //
+>>>>>>> 2f6d77e9c994f75a606bd53e29e1d3f939ff399f
     }
 
     /**
@@ -37,6 +50,7 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+<<<<<<< HEAD
         $users = new Users;
         $users->id_user = $request->id_user;
         $users->name = $request->name;
@@ -45,6 +59,9 @@ class UsersController extends Controller
         $users->save();
 
         return redirect('users')->with('success', 'User created succesfully.');
+=======
+        //
+>>>>>>> 2f6d77e9c994f75a606bd53e29e1d3f939ff399f
     }
 
     /**
@@ -91,4 +108,40 @@ class UsersController extends Controller
     {
         //
     }
+<<<<<<< HEAD
+=======
+
+    public function authenticate(Request $request)
+    {
+        // $credentials = $request->validate([
+        //     'email' => ['required', 'email:dns'],
+        //     'password' => ['required']
+        // ]);
+        
+        $check = Users::where('email', '=', $request->email)
+        ->where('password', '=', $request->password)
+        ->first();
+        // dd($check);
+
+        if($check){
+            $request->session()->put('LoggedUser', $check->id_user);
+            return redirect('/class/index');
+        }
+ 
+        // if (Auth::attempt($credentials)) {
+        //     $request->session()->regenerate();
+        //     return redirect()->intended('/');
+        // }
+ 
+        return back()->with('LoginError', 'Login failed');
+    }
+
+    public function logout()
+    {
+        if(session()->has('LoggedUser')) {
+            session()->pull('LoggedUser');
+            return redirect('/login');
+        }
+    }
+>>>>>>> 2f6d77e9c994f75a606bd53e29e1d3f939ff399f
 }

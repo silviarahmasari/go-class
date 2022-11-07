@@ -21,8 +21,8 @@
             @yield('content')
           <div class="section-body">
             @yield('script')
+          </div>
         </section>
-      </div>
       </div>
     </div>
   </div>
