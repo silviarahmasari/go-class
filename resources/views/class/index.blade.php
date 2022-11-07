@@ -41,7 +41,7 @@
                             <td>
                                 <a href="/class/show/{{ $class->id_class }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
                                 <a href="/class/edit/{{ $class->id_class }}" class="btn btn-warning"><i class="fas fa-pen"></i></a>
-                                <a href="/class/destroy/{{ $class->id_class }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                <a href="{{ route('classes.destroy', $class->id_class)}}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
                     @endforeach

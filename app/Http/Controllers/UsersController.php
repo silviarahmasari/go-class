@@ -4,11 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Users;
 use Illuminate\Http\Request;
-<<<<<<< HEAD
-=======
 use Illuminate\Support\Facades\Hash;
 // use Illuminate\Support\Facades\Auth;
->>>>>>> 2f6d77e9c994f75a606bd53e29e1d3f939ff399f
 
 class UsersController extends Controller
 {
@@ -19,13 +16,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
-        $users = Users::all();
-
-        return view('users.index', compact('users'));
-=======
         return view('login');
->>>>>>> 2f6d77e9c994f75a606bd53e29e1d3f939ff399f
     }
 
     /**
@@ -35,11 +26,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-<<<<<<< HEAD
-        return view('users.create');
-=======
         //
->>>>>>> 2f6d77e9c994f75a606bd53e29e1d3f939ff399f
     }
 
     /**
@@ -50,18 +37,7 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-<<<<<<< HEAD
-        $users = new Users;
-        $users->id_user = $request->id_user;
-        $users->name = $request->name;
-        $users->email = $request->email;
-        $users->password = $request->password;
-        $users->save();
-
-        return redirect('users')->with('success', 'User created succesfully.');
-=======
         //
->>>>>>> 2f6d77e9c994f75a606bd53e29e1d3f939ff399f
     }
 
     /**
@@ -108,8 +84,6 @@ class UsersController extends Controller
     {
         //
     }
-<<<<<<< HEAD
-=======
 
     public function authenticate(Request $request)
     {
@@ -119,7 +93,7 @@ class UsersController extends Controller
         // ]);
         
         $check = Users::where('email', '=', $request->email)
-        ->where('password', '=', $request->password)
+        ->where('password', Hash::check('password', $request->password))
         ->first();
         // dd($check);
 
@@ -143,5 +117,21 @@ class UsersController extends Controller
             return redirect('/login');
         }
     }
->>>>>>> 2f6d77e9c994f75a606bd53e29e1d3f939ff399f
+
+    public function register()
+    {
+        return view('register');
+    }
+
+    public function register_action(Request $request)
+    {
+        $users = new Users;
+        $users->name = $request->name;
+        $users->email = $request->email;
+        // $users->password = $request->password;
+        $users->password = Hash::make($request->password);
+        $users->save();
+
+        return redirect('login')->with('success', 'Registration Success');
+    }
 }

@@ -18,6 +18,7 @@
                         <div class="article-image" data-background="{{ asset ('assets/img/class/banner-class.jpg') }}"></div>
                         <div class="article-title text-white pl-3 pb-0">
                             <h2>{{ $data->class_name}}</h2>
+                            <p>{{ $data->class_desc}}</p>
                         </div>
                     </div>
                     <div class="article-details">

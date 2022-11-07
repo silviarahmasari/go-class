@@ -2,10 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
-<<<<<<< HEAD
-=======
 use App\Http\Controllers\ClassesController;
->>>>>>> 2f6d77e9c994f75a606bd53e29e1d3f939ff399f
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,17 +41,15 @@ Route::get('register', function () {
     return view('register');
 });
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+// Route::get('/', function () {
+//     return view('dashboard');
+// });
 
-<<<<<<< HEAD
-Route::get('/users', [UsersController::class, 'index'])->name('users.index');
-Route::get('/users/create', [UsersController::class, 'create'])->name('users.create');
-Route::post('/users/store', [UsersController::class, 'store'])->name('users.store');
-Route::get('/users/show', [UsersController::class, 'show'])->name('users.show');
-Route::get('/users/update', [UsersController::class, 'update'])->name('users.update');
-=======
+Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+
+Route::get('register', [UsersController::class, 'register'])->name('register');
+Route::post('register', [UsersController::class, 'register_action'])->name('register.action');
+
 Route::get('/login', [UsersController::class, 'index'])->name('login');
 Route::post('/authenticate', [UsersController::class, 'authenticate'])->name('authenticate');
 Route::get('/logout', [UsersController::class, 'logout'])->name('logout');
@@ -65,4 +62,3 @@ Route::get('class/show/{id}', [ClassesController::class, 'show'])->name('classes
 Route::get('class/edit/{id}', [ClassesController::class, 'edit'])->name('classes.edit');
 Route::post('class/update/{id}', [ClassesController::class, 'update'])->name('classes.update');
 Route::get('class/destroy/{id}', [ClassesController::class, 'destroy'])->name('classes.destroy');
->>>>>>> 2f6d77e9c994f75a606bd53e29e1d3f939ff399f
