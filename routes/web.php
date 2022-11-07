@@ -25,9 +25,9 @@ Route::get('welcome', function () {
     return view('welcome');
 });
 
-// Route::get('login', function () {
-//     return view('login');
-// });
+Route::get('/', function () {
+    return view('login');
+});
 
 Route::get('about', function () {
     return view('about');
@@ -45,7 +45,7 @@ Route::get('register', function () {
 //     return view('dashboard');
 // });
 
-Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
 
 Route::get('register', [UsersController::class, 'register'])->name('register');
 Route::post('register', [UsersController::class, 'register_action'])->name('register.action');

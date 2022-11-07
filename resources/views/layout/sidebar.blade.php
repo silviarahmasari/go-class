@@ -1,7 +1,7 @@
 <div class="main-sidebar">
   <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
-      <a href="{{ URL::to('/') }}">GoClass</a>
+      <a href="{{ URL::to('dashboard') }}">GoClass</a>
     </div>
 
     <ul class="sidebar-menu">
