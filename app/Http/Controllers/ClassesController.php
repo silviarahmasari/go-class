@@ -16,7 +16,7 @@ class ClassesController extends Controller
     public function index()
     {
         $user = Users::where('id_user', '=', session('LoggedUser'))->first();
-        $data = Classes::with('users')->get();
+        $data = Classes::with('users')->whereRelation('users', 'id_user', '=', session('LoggedUser'))->get();
         // dd($data);
         if(!$user){
             return redirect('/login')->with('error', 'Login fisrt!');
@@ -49,14 +49,14 @@ class ClassesController extends Controller
      */
     public function store(Request $request)
     {
-        $class = new Classes;
-        $class->user_id = $request->user_id;
-        $class->class_name = $request->class_name;
-        $class->class_code = $request->class_code;
-        $class->class_desc = $request->class_desc;
-        $class->class_status = $request->class_status;
+        $classes = new Classes;
+        $classes->user_id = session('LoggedUser');
+        $classes->class_name = $request->class_name;
+        $classes->class_code = $request->class_code;
+        $classes->class_desc = $request->class_desc;
+        $classes->class_status = $request->class_status;
 
-        $class->save();
+        $classes->save();
 
         return redirect('class/index')->with('success', 'Class created successfully.');
     }
@@ -67,9 +67,18 @@ class ClassesController extends Controller
      * @param  \App\Models\Classes  $classes
      * @return \Illuminate\Http\Response
      */
-    public function show(Classes $classes)
+    public function show(Classes $classes, $id)
     {
-        //
+        $user = Users::where('id_user', '=', session('LoggedUser'))->first();
+        $classes = Classes::where('id_class', '=', $id)
+        ->with('users')
+        ->get();
+        // dd($classes);
+        if(!$user){
+            return redirect('/login')->with('error', 'Login fisrt!');
+        }
+
+        return view('class.show', compact('classes', 'user'));
     }
 
     /**
@@ -78,16 +87,18 @@ class ClassesController extends Controller
      * @param  \App\Models\Classes  $classes
      * @return \Illuminate\Http\Response
      */
-    public function edit(Classes $classes)
+    public function edit(Classes $classes, $id)
     {
         $user = Users::where('id_user', '=', session('LoggedUser'))->first();
-        $data = Classes::find(1)->users;
-        // dd($data);
+        $classes = Classes::where('id_class', '=', $id)
+        ->with('users')
+        ->get();
+        // dd($classes);
         if(!$user){
             return redirect('/login')->with('error', 'Login fisrt!');
         }
 
-        return view('class.edit', compact('data', 'user'));
+        return view('class.edit', compact('classes', 'user'));
     }
 
     /**
@@ -97,16 +108,16 @@ class ClassesController extends Controller
      * @param  \App\Models\Classes  $classes
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Classes $classes)
+    public function update(Request $request, Classes $classes, $id)
     {
-        $class = Classes::find($classes);
-        $class->user_id = $request->user_id;
-        $class->class_name = $request->class_name;
-        $class->class_code = $request->class_code;
-        $class->class_desc = $request->class_desc;
-        $class->class_status = $request->class_status;
+        $classes = Classes::find($id);
+        $classes->user_id = session('LoggedUser');
+        $classes->class_name = $request->class_name;
+        $classes->class_code = $request->class_code;
+        $classes->class_desc = $request->class_desc;
+        $classes->class_status = $request->class_status;
 
-        $class->update();
+        $classes->update();
 
         return redirect('class/index')->with('success', 'Class updated successfully.');
     }
@@ -117,9 +128,10 @@ class ClassesController extends Controller
      * @param  \App\Models\Classes  $classes
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id_class)
+    public function destroy(Classes $classes, $id)
     {
-        $class = Classes::findOrFail($id_class);
+        //
+        $class = Classes::findOrFail($id);
         $class->delete();
 
         return redirect('class/index')->with('success', 'Class Data is successfully deleted');

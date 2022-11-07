@@ -87,25 +87,15 @@ class UsersController extends Controller
 
     public function authenticate(Request $request)
     {
-        // $credentials = $request->validate([
-        //     'email' => ['required', 'email:dns'],
-        //     'password' => ['required']
-        // ]);
-        
-        $check = Users::where('email', '=', $request->email)
+       $check = Users::where('email', '=', $request->email)
         ->where('password', Hash::check('password', $request->password))
         ->first();
         // dd($check);
 
         if($check){
             $request->session()->put('LoggedUser', $check->id_user);
-            return redirect('/class/index');
+            return redirect()->intended('/class/index');
         }
- 
-        // if (Auth::attempt($credentials)) {
-        //     $request->session()->regenerate();
-        //     return redirect()->intended('/');
-        // }
  
         return back()->with('LoginError', 'Login failed');
     }
@@ -128,10 +118,10 @@ class UsersController extends Controller
         $users = new Users;
         $users->name = $request->name;
         $users->email = $request->email;
-        // $users->password = $request->password;
+        $users->password = $request->password;
         $users->password = Hash::make($request->password);
         $users->save();
 
         return redirect('login')->with('success', 'Registration Success');
     }
-}
+}        
