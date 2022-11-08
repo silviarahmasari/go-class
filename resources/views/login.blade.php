@@ -25,7 +25,16 @@
   
                   <form action="{{ route('authenticate') }}" method="POST">
                     @csrf
-                    <p>Please login to your account</p>
+                    @if (session('LoginError'))
+                      <div class="alert alert-danger">
+                        {{ session('LoginError') }}                    
+                      </div>
+                    @endif
+                    @if (session('success'))
+                      <div class="alert alert-success">
+                        {{ session('success') }}                    
+                      </div>
+                    @endif
   
                     <div class="form-outline mb-4">
                       <label class="form-label" for="form2Example11">Email</label>
