@@ -1,7 +1,6 @@
 @extends('layout.mainlayout')
 @section('title','Class')
 @section('PWBF','')
-@section('auth', $user->name)
 
 @section('content')
 <div class="section-header">

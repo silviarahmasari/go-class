@@ -1,7 +1,6 @@
 @extends('layout.mainlayout')
 @section('title','Class')
 @section('PWBF','')
-@section('auth', $user->name)
 
 @section('content')
 <div class="section-header">
@@ -22,8 +21,8 @@
                     @csrf
                     <div class="form-group">
                         <label>NAME</label>
-                        <input type="hidden" class="form-control" id="user_id" name="user_id" value="{{ $user->id_user }}">
-                        <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" readonly>
+                        <input type="hidden" class="form-control" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
+                        <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->name }}" readonly>
                     </div>
                     <div class="form-group">
                         <label>CLASS CODE</label>

@@ -1,7 +1,6 @@
 @extends('layout.mainlayout')
 @section('title','Class')
 @section('PWBF','')
-@section('auth', $user->name)
 
 @section('content')
 <div class="section-header">
@@ -36,17 +35,17 @@
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
-                    @foreach ($data as $class)
+                    @foreach ($class as $kelas)
                         <tr>
-                            <td>{{ $class->class_code }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $class->class_name }}</td>
-                            <td>{{ $class->class_desc }}</td>
-                            <td>{{ $class->class_status }}</td>
+                            <td>{{ $kelas->class_code }}</td>
+                            <td>{{ Auth::user()->name }}</td>
+                            <td>{{ $kelas->class_name }}</td>
+                            <td>{{ $kelas->class_desc }}</td>
+                            <td>{{ $kelas->class_status }}</td>
                             <td>
-                                <a href="{{ route('classes.show', $class->id_class)}}" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                <a href="{{ route('classes.edit', $class->id_class)}}" class="btn btn-warning"><i class="fas fa-pen"></i></a>
-                                <a href="{{ route('classes.destroy', $class->id_class)}}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                <a href="{{ route('classes.show', $kelas->id_class)}}" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                <a href="{{ route('classes.edit', $kelas->id_class)}}" class="btn btn-warning"><i class="fas fa-pen"></i></a>
+                                <a href="{{ route('classes.destroy', $kelas->id_class)}}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
                     @endforeach

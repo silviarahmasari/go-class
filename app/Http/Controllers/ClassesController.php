@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Users;
 use App\Models\Classes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClassesController extends Controller
 {
@@ -15,14 +16,14 @@ class ClassesController extends Controller
      */
     public function index()
     {
-        $user = Users::where('id_user', '=', session('LoggedUser'))->first();
-        $data = Classes::with('users')->whereRelation('users', 'id_user', '=', session('LoggedUser'))->get();
+        // $user = Users::where('id_user', '=', session('LoggedUser'))->first();
+        // $data = Classes::with('users')->whereRelation('users', Auth::user()->id)->get();
         // dd($data);
-        if(!$user){
-            return redirect('/login')->with('error', 'Login fisrt!');
-        }
-
-        return view('class.index', compact('data', 'user'));
+        // if(!$user){
+        //     return redirect('/login')->with('error', 'Login fisrt!');
+        // }
+        $class = Classes::all();
+        return view('class.index', compact('class'));
     }
 
     /**
@@ -32,13 +33,13 @@ class ClassesController extends Controller
      */
     public function create()
     {
-        $user = Users::where('id_user', '=', session('LoggedUser'))->first();
+        // $user = Users::where('id_user', '=', session('LoggedUser'))->first();
 
-        if(!$user){
-            return redirect('/login')->with('error', 'Login fisrt!');
-        }
+        // if(!$user){
+        //     return redirect('/login')->with('error', 'Login fisrt!');
+        // }
 
-        return view('class.create', compact('user'));
+        return view('class.create');
     }
 
     /**
@@ -50,7 +51,7 @@ class ClassesController extends Controller
     public function store(Request $request)
     {
         $classes = new Classes;
-        $classes->user_id = session('LoggedUser');
+        $classes->user_id = Auth::user()->id;
         $classes->class_name = $request->class_name;
         $classes->class_code = $request->class_code;
         $classes->class_desc = $request->class_desc;
