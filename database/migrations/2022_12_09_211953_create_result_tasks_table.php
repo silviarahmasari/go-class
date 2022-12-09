@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddRoleToUsers extends Migration
+class CreateResultTasksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddRoleToUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->String('role', 10);
+        Schema::create('result_tasks', function (Blueprint $table) {
+            $table->bigInteger('task_id');
+            $table->bigInteger('user_id');
+            $table->text('result_description');
+            $table->text('result_file');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ class AddRoleToUsers extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('role');
-        });
+        Schema::dropIfExists('result_tasks');
     }
 }

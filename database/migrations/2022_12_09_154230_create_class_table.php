@@ -15,11 +15,9 @@ class CreateClassTable extends Migration
     {
         Schema::create('class', function (Blueprint $table) {
             $table->bigIncrements('id_class');
-            $table->bigInteger('user_id');
             $table->String('class_code');
             $table->String('class_name');
             $table->text('class_desc');
-            $table->enum('class_status', ['aktif', 'nonaktif']);
             $table->timestamps();
         });
     }
