@@ -65,7 +65,7 @@ Route::get('/logout', [LoginController::class, 'Logout'])->name('logout');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::middleware(['auth', 'CheckRole:admin'])->group(function() {
+Route::middleware(['auth'])->group(function() {
     Route::get('class/index', [ClassesController::class, 'index'])->name('classes.index');
     Route::get('class/create', [ClassesController::class, 'create'])->name('classes.create');
     Route::post('class/store', [ClassesController::class, 'store'])->name('classes.store');
@@ -75,6 +75,6 @@ Route::middleware(['auth', 'CheckRole:admin'])->group(function() {
     Route::get('class/destroy/{id}', [ClassesController::class, 'destroy'])->name('classes.destroy');
 });
 
-Route::middleware(['auth', 'CheckRole:user'])->group(function() {
-    Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
+Route::middleware(['auth'])->group(function() {
 });
+Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');

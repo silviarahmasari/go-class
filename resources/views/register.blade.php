@@ -39,7 +39,7 @@
                   <span toggle="#cpassword-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                   <input type="text" id="cpassword" name="cpassword" class="form-control" />
                 </div>
-                <div class="form-group mt-3">
+                {{-- <div class="form-group mt-3">
                     <label class="form-label" for="label-role">Pilih Role</label>
                     <select name="role" id="role" class="form-control">
                         <option selected>-- Choose Role --</option>
@@ -51,7 +51,7 @@
                             </div>
                         </div>
                     </select>
-                </div>
+                </div> --}}
                 <div class="form-group text-center">
                   <button type="submit" class="btn btn-success btn-md ">Submit</button>
                 </div>
