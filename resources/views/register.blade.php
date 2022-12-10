@@ -31,13 +31,13 @@
                 </div>
                 <div class="form-group">
                   <label id="password-field" class="form-label" for="label-nama">Password</label>
+                  <input type="password" id="password" name="password" class="form-control" />
                   <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
-                  <input type="text" id="password" name="password" class="form-control" />
                 </div>
                 <div class="form-group">
                   <label  id="cpassword-field" class="form-label" for="label-nama">Confirm Password</label>
+                  <input type="password" id="cpassword" name="cpassword" class="form-control" />
                   <span toggle="#cpassword-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
-                  <input type="text" id="cpassword" name="cpassword" class="form-control" />
                 </div>
                 {{-- <div class="form-group mt-3">
                     <label class="form-label" for="label-role">Pilih Role</label>
