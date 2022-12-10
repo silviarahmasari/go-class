@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 // use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\Teacher\ClassesController;
+use App\Http\Controllers\Teacher\PostsController;
 use App\Http\Controllers\Student\StudentsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
@@ -74,7 +75,7 @@ Route::middleware(['auth'])->group(function() {
     // Beranda
     Route::get('/beranda', [HomeController::class, 'index'])->name('beranda');
     
-    // Teacher
+    // Teacher Class
     Route::get('class/index', [ClassesController::class, 'index'])->name('classes.index');
     Route::get('class/create', [ClassesController::class, 'create'])->name('classes.create');
     Route::post('class/store', [ClassesController::class, 'store'])->name('classes.store');
@@ -82,6 +83,9 @@ Route::middleware(['auth'])->group(function() {
     Route::get('class/edit/{id}', [ClassesController::class, 'edit'])->name('classes.edit');
     Route::post('class/update/{id}', [ClassesController::class, 'update'])->name('classes.update');
     Route::get('class/destroy/{id}', [ClassesController::class, 'destroy'])->name('classes.destroy');
+
+    // Teacher Post
+    Route::post('teacher/post/store/{id}', [PostsController::class, 'store'])->name('teacher.post.store');
     
     // Student
     Route::get('students/dashboard/{id}', [StudentsController::class, 'show'])->name('students.dashboard');

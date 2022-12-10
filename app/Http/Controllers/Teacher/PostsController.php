@@ -5,14 +5,11 @@ namespace App\Http\Controllers\Teacher;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Posts;
-use App\Models\Users;
-use App\Models\Classes;
 use App\Models\ClassPosts;
-use App\Models\ClassUsers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
-class ClassesController extends Controller
+class PostsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,7 +18,7 @@ class ClassesController extends Controller
      */
     public function index()
     {
-        
+        //
     }
 
     /**
@@ -40,9 +37,31 @@ class ClassesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        $posts = new Posts;
+        $posts->post_title = $request->post_title;
+        $posts->post_description = $request->post_description;
+
+        if($file = $request->hasFile('post_file')) {
+            $file = $request->file('post_file') ;
+            $fileName = $file->getClientOriginalName() ;
+            $destinationPath = public_path().'/post_files' ;
+            $file->move($destinationPath,$fileName);
+
+            $posts->post_file = $fileName;
+        }
+        
+        $posts->class_id = $id;
+        $posts->save();
+
+        $cp = new ClassPosts;
+        $cp->post_id = $posts->id;
+        $cp->user_id = Auth::user()->id;
+        $cp->save();
+        
+
+        return redirect('teacher/class/show/'.$id)->with('success', 'Post created successfully.');
     }
 
     /**
@@ -53,24 +72,7 @@ class ClassesController extends Controller
      */
     public function show($id)
     {
-        $class = DB::table('class_users as cu')
-                    ->select('*')
-                    ->leftjoin('users as u', 'cu.user_id', '=', 'u.id')
-                    ->leftjoin('class as c', 'cu.class_id', '=', 'c.id_class')
-                    ->where('cu.is_owner', '=', 1)
-                    ->where('cu.user_id', '=', Auth::user()->id)
-                    ->where('cu.class_id', '=', $id)
-                    ->get();
-        // dd($class);
-        $posts = DB::table('class_posts as cp')
-                    ->select('*')
-                    ->leftjoin('users as u', 'cp.user_id', '=', 'u.id')
-                    ->leftjoin('posts as p', 'cp.post_id', '=', 'p.id')
-                    ->where('p.class_id', '=', $id)
-                    ->get();
-        // dd($posts);
-
-        return view('teachers.dashboard', compact('class', 'posts'));            
+        //
     }
 
     /**

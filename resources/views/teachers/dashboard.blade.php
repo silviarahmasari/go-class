@@ -43,26 +43,38 @@
                             <a type="button" class="text-primary" id="newPost">Umumkan sesuatu untuk kelas Anda</a>
                         </div>    
                         <div id="openForm">
-                            <div class="form-group">
-                                <label for="my-input">Text</label>
-                                <input id="my-input" class="form-control" type="text" name="">
-                            </div>
-                            <div class="form-group">
-                                <a class="btn btn-secondary" id="cancelPost">batal</a>
-                                <button class="btn btn-success">simpan</button>
-                            </div>
+                            <form action="{{ route('teacher.post.store', $class[0]->class_id) }}" enctype="multipart/form-data" method="POST">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="post_title">Title</label>
+                                    <input id="post_title" class="form-control" type="text" name="post_title">
+                                </div>
+                                <div class="form-group">
+                                    <label for="post_description">Description</label>
+                                    <textarea id="post_description" class="form-control" type="text" name="post_description"></textarea>
+                                </div>
+                                <div class="form-group">    
+                                    <label for="post_file">File</label>
+                                    <input id="post_file" class="form-control" type="file" name="post_file">
+                                </div>    
+                                <div class="form-group">
+                                    <a class="btn btn-secondary" id="cancelPost">batal</a>
+                                    <button class="btn btn-success">simpan</button>
+                                </div>
+                            </form>    
                         </div>
                     </div>
                 </div>
-                <div class="card rounded-lg">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
+                @foreach ($posts as $post)
+                    <div class="card rounded-lg">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $post->post_title }}</h5>
+                            <h6 class="card-subtitle  text-muted text-sm">oleh {{ $post->name }}</h6>
+                            <p class="card-text">{{ $post->post_description }}</p>
+                            <a href="#" class="card-link">{{ $post->post_file }}</a>
+                        </div>
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
