@@ -17,6 +17,11 @@
                         <h5>Tugas Kelas</h5>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('students.orang', $kelas) }}">
+                        <h5>Orang</h5>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -29,10 +34,10 @@
                         <h6>List Tugas</h6><br>
                             <a href="{{ route('students.detailtugas', $data->id) }}">
                                 <div class="row">
-                                    <div class="col col-2 product-image pl-5">
-                                        <img alt="image" src="{{ asset ('assets/img/class/product-3-50.png') }}" class="img-fluid" style="width: 30px">
+                                    <div class="col-1 pl-5">
+                                        <li class="fas fa-book"></li>
                                     </div>
-                                    <div class="col col-10">
+                                    <div class="col-11">
                                         <h5>{{ $data->task_title }}</h5>
                                     </div>
                                 </div>

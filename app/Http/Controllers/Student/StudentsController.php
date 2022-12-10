@@ -118,7 +118,8 @@ class StudentsController extends Controller
         //
     }
 
-    public function tugasKelas($id) {
+    public function tugasKelas($id) 
+    {
         $kelas = $id;
         $tugas = DB::table('tasks as t')
             ->select('*')
@@ -130,15 +131,36 @@ class StudentsController extends Controller
         return view('students.tugaskelas', compact('tugas', 'kelas'));  
     }
 
-    public function detailTugas($id) {
-
+    public function detailTugas($id) 
+    {
+        $kelas = $id;
         $tugas = DB::table('tasks as t')
             ->select('*')
             ->leftjoin('result_tasks as rt', 't.id', '=', 'rt.task_id')
+            ->leftjoin('users as u', 'u.id', '=', 't.task_created_by')
             ->where('t.id', '=', $id)
             ->get();
         // dd($tugas);
 
-        return view('students.detailtugas', compact('tugas'));
+        return view('students.detailtugas', compact('tugas', 'kelas'));
+    }
+
+    public function orang($id)
+    {
+        $kelas = $id;
+        $users = DB::table('class_users as cu')
+            ->select('*')
+            ->leftjoin('users as u', 'cu.user_id', '=', 'u.id')
+            ->where('cu.class_id', '=', $id)
+            ->get();
+        $count = DB::table('class_users as cu')
+            ->select('*')
+            ->leftjoin('users as u', 'cu.user_id', '=', 'u.id')
+            ->where('cu.class_id', '=', $id)
+            ->where('cu.is_owner', '=', 0)
+            ->count();
+        // dd($users);
+
+        return view('students.detailorang', compact('users', 'kelas', 'count'));  
     }
 }

@@ -91,16 +91,16 @@ class ClassesController extends Controller
      */
     public function edit(Classes $classes, $id)
     {
-        $user = Users::where('id_user', '=', session('LoggedUser'))->first();
+        // $user = Users::where('id_user', '=', session('LoggedUser'))->first();
         $classes = Classes::where('id_class', '=', $id)
-        ->with('users')
+        // ->with('users')
         ->get();
         // dd($classes);
-        if(!$user){
-            return redirect('/login')->with('error', 'Login fisrt!');
-        }
+        // if(!$user){
+        //     return redirect('/login')->with('error', 'Login fisrt!');
+        // }
 
-        return view('class.edit', compact('classes', 'user'));
+        return view('class.edit', compact('classes'));
     }
 
     /**

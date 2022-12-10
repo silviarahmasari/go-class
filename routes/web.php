@@ -88,4 +88,5 @@ Route::middleware(['auth'])->group(function() {
     Route::post('students/dashboard/{id}', [StudentsController::class, 'store'])->name('students.insertposts');
     Route::get('students/tugaskelas/{id}', [StudentsController::class, 'tugasKelas'])->name('students.tugaskelas');
     Route::get('students/detailtugas/{id_task}', [StudentsController::class, 'detailTugas'])->name('students.detailtugas');
+    Route::get('students/orang/{id}', [StudentsController::class, 'orang'])->name('students.orang');
 });

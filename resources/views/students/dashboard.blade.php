@@ -17,6 +17,11 @@
                         <h5>Tugas Kelas</h5>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('students.orang', $kelas) }}">
+                        <h5>Orang</h5>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -26,7 +31,7 @@
             <div class="col col-3 pt-4">
                 <div class="card rounded-lg">
                     <div class="card-body">
-                        <h5 class="card-title">List Tugas</h5>
+                        <h6 class="text-warning text-center card-title">Semoga harimu menyenangkan!</h6>
                     </div>
                 </div>
             </div>
