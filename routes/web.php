@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 // use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\Teacher\ClassesController;
-use App\Http\Controllers\StudentsController;
+use App\Http\Controllers\Student\StudentsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
@@ -84,6 +84,7 @@ Route::middleware(['auth'])->group(function() {
     Route::get('class/destroy/{id}', [ClassesController::class, 'destroy'])->name('classes.destroy');
     
     // Student
-    Route::get('students/dashboard', [StudentsController::class, 'index'])->name('students.dashboard');
-    Route::get('students/tugaskelas', [StudentsController::class, 'tugasKelas'])->name('students.tugaskelas');
+    Route::get('students/dashboard/{id}', [StudentsController::class, 'show'])->name('students.dashboard');
+    Route::post('students/dashboard/{id}', [StudentsController::class, 'store'])->name('students.insertposts');
+    Route::get('students/tugaskelas/{id}', [StudentsController::class, 'tugasKelas'])->name('students.tugaskelas');
 });

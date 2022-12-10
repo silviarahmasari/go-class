@@ -8,12 +8,12 @@
         <div class="container-fluid">
             <ul class="nav justify-content-center">
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('students.dashboard') }}">
+                    <a class="nav-link active" href="{{ route('students.dashboard', $class[0]->class_id) }}">
                         <h5>Streaming</h5>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('students.tugaskelas') }}">
+                    <a class="nav-link" href="{{ route('students.tugaskelas', $class[0]->class_id) }}">
                         <h5>Tugas Kelas</h5>
                     </a>
                 </li>
@@ -31,28 +31,69 @@
             <div class="col col-3 pt-4">
                 <div class="card rounded-lg">
                     <div class="card-body">
-                        <h5 class="card-title">Kode Kelas</h5>
-                        <b class="card-text text-bg-primary">KJSDIUE873</b>
+                        <h5 class="card-title">List Tugas</h5>
                     </div>
                 </div>
             </div>
             <div class="col col-9 pt-4">
-                <div class="card rounded-lg">
+                <div class="card rounded-lg shadow-primary">
                     <div class="card-body">
-                        <a href="">
-                            <div class="row justify-content-center">
-                                <div class="col col-2">
-                                    <h5><li class="fas fa-plus"></li></h5>
+                        <div id="closeForm">
+                            <a type="button" class="text-primary" id="newPost"><h5>Umumkan sesuatu untuk kelas Anda</h5></a>
+                        </div>    
+                        <div id="openForm">
+                            <form action="{{ route('students.insertposts', $class[0]->id_class) }}" method="POST">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="my-input">Judul Postingan</label>
+                                    <input id="my-input" class="form-control" type="text" name="post_title" required>
                                 </div>
-                                <div class="col col-10">
-                                    <h5>Umumkan sesuatu ke kelas Anda</h5>
+                                <div class="form-group">
+                                    <label for="my-input">Deskripsi</label>
+                                    <input id="my-input" class="form-control" type="text" name="post_description">
                                 </div>
-                            </div>
-                        </a>
+                                <div class="form-group">
+                                    <label for="my-input">Upload sesuatu (Opsional)</label>
+                                    <input id="my-input" class="form-control" type="file" name="post_file">
+                                </div>
+                                <div class="form-group">
+                                    <a class="btn btn-secondary" id="cancelPost">Batal</a>
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
+                @foreach ($posts as $post)
+                    <div class="card rounded-lg">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $post->post_title }}</h5>
+                            <h6 class="card-subtitle  text-muted text-sm">oleh {{ $post->name }}</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="card-link">Card link</a>
+                            <a href="#" class="card-link">Another link</a>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>
 </div>
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#openForm").hide();
+
+        $( "#newPost" ).click(function() {
+            $("#closeForm").hide();
+            $( "#openForm" ).show( 500 );
+        });
+
+        $( "#cancelPost" ).click(function() {
+            $("#openForm").hide();
+            $( "#closeForm" ).show( 200 );
+        });
+    })     
+</script>
