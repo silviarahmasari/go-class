@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
-use App\Http\Controllers\ClassesController;
+// use App\Http\Controllers\ClassesController;
+use App\Http\Controllers\Teacher\ClassesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
@@ -69,10 +70,11 @@ Route::get('/logout', [LoginController::class, 'Logout'])->name('logout');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth'])->group(function() {
+    // Teacher
     Route::get('class/index', [ClassesController::class, 'index'])->name('classes.index');
     Route::get('class/create', [ClassesController::class, 'create'])->name('classes.create');
     Route::post('class/store', [ClassesController::class, 'store'])->name('classes.store');
-    Route::get('class/show/{id}', [ClassesController::class, 'show'])->name('classes.show');
+    Route::get('teacher/class/show/{id}', [ClassesController::class, 'show'])->name('teacher.classes.show');
     Route::get('class/edit/{id}', [ClassesController::class, 'edit'])->name('classes.edit');
     Route::post('class/update/{id}', [ClassesController::class, 'update'])->name('classes.update');
     Route::get('class/destroy/{id}', [ClassesController::class, 'destroy'])->name('classes.destroy');

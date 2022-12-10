@@ -18,7 +18,7 @@ class CreateClassTable extends Migration
             $table->String('class_code');
             $table->String('class_name');
             $table->text('class_desc');
-            $table->text('class_banner');
+            $table->text('class_banner')->nullable();
             $table->timestamps();
         });
     }

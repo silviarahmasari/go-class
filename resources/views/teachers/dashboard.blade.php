@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <ul class="nav justify-content-center">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route('teacher.classes.show', $class[0]->class_id)}}">
                         <h5>Streaming</h5>
                     </a>
                 </li>
@@ -32,11 +32,24 @@
                 <div class="card rounded-lg">
                     <div class="card-body">
                         <h5 class="card-title">Kode Kelas</h5>
-                        <b class="card-text text-bg-primary">KJSDIUE873</b>
+                        <b class="card-text text-bg-primary">{{ $class[0]->class_code }}</b>
                     </div>
                 </div>
             </div>
             <div class="col col-9 pt-4">
+                <div class="card rounded-lg">
+                    <div class="card-body">
+                        <div id="closeForm">
+                            <a type="button" id="newPost">Umumkan sesuatu untuk kelas Anda</a>
+                        </div>    
+                        <div id="openForm">
+                            <div class="form-group">
+                                <label for="my-input">Text</label>
+                                <input id="my-input" class="form-control" type="text" name="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="card rounded-lg">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
@@ -51,3 +64,16 @@
     </div>
 </div>
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#openForm").hide();
+
+        $( "#newPost" ).click(function() {
+            $("#closeForm").hide();
+            $( "#openForm" ).show( 500 );
+        });
+    })   
+
+</script>
