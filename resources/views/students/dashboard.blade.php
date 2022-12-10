@@ -68,10 +68,15 @@
                     <div class="card rounded-lg">
                         <div class="card-body">
                             <h5 class="card-title">{{ $post->post_title }}</h5>
-                            <h6 class="card-subtitle  text-muted text-sm">oleh {{ $post->name }}</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
+                            <h6 class="card-subtitle text-muted text-sm">oleh {{ $post->name }}</h6>
+                            <p class="card-text">{{ $post->post_description }}</p>
+                            <a class="card-link" type="button" target="_blank">
+                                @if ($post->post_file != '')
+                                    <div class="card card-danger p-2 px-2">
+                                        <b class="text-primary"><li class="far fa-folder-open"></li> {{ $post->post_file }}</b>
+                                    </div>
+                                @endif
+                            </a>
                         </div>
                     </div>
                 @endforeach
