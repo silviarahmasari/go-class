@@ -87,4 +87,5 @@ Route::middleware(['auth'])->group(function() {
     Route::get('students/dashboard/{id}', [StudentsController::class, 'show'])->name('students.dashboard');
     Route::post('students/dashboard/{id}', [StudentsController::class, 'store'])->name('students.insertposts');
     Route::get('students/tugaskelas/{id}', [StudentsController::class, 'tugasKelas'])->name('students.tugaskelas');
+    Route::get('students/detailtugas/{id_task}', [StudentsController::class, 'detailTugas'])->name('students.detailtugas');
 });

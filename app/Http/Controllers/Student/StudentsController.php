@@ -64,6 +64,7 @@ class StudentsController extends Controller
      */
     public function show($id)
     {
+        $kelas = $id;
         $class = DB::table('class_users as cu')
             ->select('*')
             ->leftjoin('users as u', 'cu.user_id', '=', 'u.id')
@@ -80,7 +81,7 @@ class StudentsController extends Controller
             ->where('p.class_id', '=', $id)
             ->get();
 
-        return view('students.dashboard', compact('class', 'posts'));   
+        return view('students.dashboard', compact('class', 'posts', 'kelas'));   
     }
 
     /**
@@ -118,9 +119,26 @@ class StudentsController extends Controller
     }
 
     public function tugasKelas($id) {
-        
-        $tugas = Tasks::where('class_id', $id);
-        $class = Classes::where('class_id', $id);
-        return redirect('students/tugaskelas/'.$id, compact('tugas'));
+        $kelas = $id;
+        $tugas = DB::table('tasks as t')
+            ->select('*')
+            ->leftjoin('class as c', 't.class_id', '=', 'c.id_class')
+            ->where('t.class_id', '=', $id)
+            ->get();
+        // dd($kelas);
+
+        return view('students.tugaskelas', compact('tugas', 'kelas'));  
+    }
+
+    public function detailTugas($id) {
+
+        $tugas = DB::table('tasks as t')
+            ->select('*')
+            ->leftjoin('result_tasks as rt', 't.id', '=', 'rt.task_id')
+            ->where('t.id', '=', $id)
+            ->get();
+        // dd($tugas);
+
+        return view('students.detailtugas', compact('tugas'));
     }
 }

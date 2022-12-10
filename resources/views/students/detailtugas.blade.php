@@ -8,18 +8,13 @@
         <div class="container-fluid">
             <ul class="nav justify-content-center">
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('students.dashboard', $class[0]->class_id)) }}">
+                    <a class="nav-link active" href="{{ route('students.dashboard', $tugas[0]->class_id) }}">
                         <h5>Streaming</h5>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('students.tugaskelas', $class[0]->class_id)) }}">
+                    <a class="nav-link" href="{{ route('students.tugaskelas', $tugas[0]->class_id) }}">
                         <h5>Tugas Kelas</h5>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <h5>Orang</h5>
                     </a>
                 </li>
             </ul>
