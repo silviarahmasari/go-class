@@ -27,31 +27,25 @@
     </div>
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <img class="rounded-lg img-fluid" style="max-width: 100%" alt="" src="https://img.freepik.com/free-vector/night-rice-field-terraces-asian-mountains-landscape-with-paddy-plantation-cascades-chinese-agricultural-farm-dark-starry-sky-with-full-moon-glowing-fireflies-cartoon-vector-illustration_107791-10584.jpg?w=1380&t=st=1670643219~exp=1670643819~hmac=29c00556c78936c881e21d474eff4f6309e05dfe521116831ef9c97bcbe2e394">
-            <div class="col col-3 pt-4">
-                <div class="card rounded-lg">
-                    <div class="card-body">
-                        <h5 class="card-title">Kode Kelas</h5>
-                        <b class="card-text text-bg-primary">KJSDIUE873</b>
-                    </div>
-                </div>
-            </div>
-            <div class="col col-9 pt-4">
-                <div class="card rounded-lg">
-                    <div class="card-body">
+            <div class="card rounded-lg col-12 p-3">
+                <div class="card-body">
+                    <h6>List Tugas</h6><br>
+                    @foreach ($tugas as $data)
                         <a href="">
-                            <div class="row justify-content-center">
-                                <div class="col col-2">
-                                    <h5><li class="fas fa-plus"></li></h5>
+                            <div class="row">
+                                <div class="col col-2 product-image pl-5">
+                                    <img alt="image" src="{{ asset ('assets/img/class/product-3-50.png') }}" class="img-fluid" style="width: 30px">
                                 </div>
                                 <div class="col col-10">
-                                    <h5>Umumkan sesuatu ke kelas Anda</h5>
+                                    <h5>{{ $data->task_title }}</h5>
                                 </div>
                             </div>
                         </a>
-                    </div>
+                        <hr>
+                    @endforeach
                 </div>
             </div>
+                
         </div>
     </div>
 </div>

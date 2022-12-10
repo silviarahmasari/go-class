@@ -23,9 +23,7 @@
                     <div class="article-details">
                         <p>{{ $data->class_desc}} </p>
                         <hr>
-                        <div class="row">
-
-                        </div>
+                        <div class="row"></div>
                     </div>
                 </article>
             </a>

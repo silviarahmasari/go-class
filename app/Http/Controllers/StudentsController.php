@@ -1,13 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Support\Facades\DB;
+use App\Models\Tasks;
 use Illuminate\Http\Request;
-use App\Models\Users;
-use App\Models\Classes;
 
-class HomeController extends Controller
+class StudentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +13,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $class = Classes::all();
-
-        return view('beranda', compact('class'));
+        return view('students.dashboard');
     }
 
     /**
@@ -85,5 +80,11 @@ class HomeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function tugasKelas() {
+        $tugas = Tasks::all();
+        
+        return view('students.tugaskelas', compact('tugas'));
     }
 }
