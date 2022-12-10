@@ -39,9 +39,9 @@ Route::get('about', function () {
 Route::get('services', function () {
     return view('services');
 });
-Route::get('teachers/dashboard', function () {
-    return view('teachers.dashboard');
-});
+// Route::get('teachers/dashboard', function () {
+//     return view('teachers.dashboard');
+// });
 
 // Route::get('register', function () {
 //     return view('register');
@@ -67,9 +67,12 @@ Route::get('/logout', [LoginController::class, 'Logout'])->name('logout');
 
 // Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth'])->group(function() {
+    // Beranda
+    Route::get('/beranda', [HomeController::class, 'index'])->name('beranda');
+    
     // Teacher
     Route::get('class/index', [ClassesController::class, 'index'])->name('classes.index');
     Route::get('class/create', [ClassesController::class, 'create'])->name('classes.create');
@@ -78,8 +81,8 @@ Route::middleware(['auth'])->group(function() {
     Route::get('class/edit/{id}', [ClassesController::class, 'edit'])->name('classes.edit');
     Route::post('class/update/{id}', [ClassesController::class, 'update'])->name('classes.update');
     Route::get('class/destroy/{id}', [ClassesController::class, 'destroy'])->name('classes.destroy');
+    
+    // Student
+    Route::get('students/dashboard', [StudentsController::class, 'index'])->name('students.dashboard');
+    Route::get('students/tugaskelas', [StudentsController::class, 'tugasKelas'])->name('students.tugaskelas');
 });
-
-Route::middleware(['auth'])->group(function() {
-});
-Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
