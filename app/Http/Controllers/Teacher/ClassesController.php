@@ -61,7 +61,7 @@ class ClassesController extends Controller
                     ->get();
         // dd($class);
 
-        return view('teachers/dashboard', compact('class'));            
+        return view('teachers.dashboard', compact('class'));            
     }
 
     /**

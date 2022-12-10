@@ -12,7 +12,11 @@
     <div class="row px-lg-5">
         @foreach ($class as $data)
         <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-            <a href="#">
+            @if ($data->is_owner == 1)
+            <a href="{{ route('teacher.classes.show', $data->class_id) }}">
+                @else
+                <a href="{{ route('students.dashboard', $data->class_id) }}">
+            @endif 
                 <article class="article">
                     <div class="article-header">
                         <div class="article-image" data-background="{{ asset ('assets/img/class/banner-class.jpg') }}"></div>

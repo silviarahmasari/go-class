@@ -40,12 +40,16 @@
                 <div class="card rounded-lg">
                     <div class="card-body">
                         <div id="closeForm">
-                            <a type="button" id="newPost">Umumkan sesuatu untuk kelas Anda</a>
+                            <a type="button" class="text-primary" id="newPost">Umumkan sesuatu untuk kelas Anda</a>
                         </div>    
                         <div id="openForm">
                             <div class="form-group">
                                 <label for="my-input">Text</label>
                                 <input id="my-input" class="form-control" type="text" name="">
+                            </div>
+                            <div class="form-group">
+                                <a class="btn btn-secondary" id="cancelPost">batal</a>
+                                <button class="btn btn-success">simpan</button>
                             </div>
                         </div>
                     </div>
@@ -73,6 +77,11 @@
         $( "#newPost" ).click(function() {
             $("#closeForm").hide();
             $( "#openForm" ).show( 500 );
+        });
+
+        $( "#cancelPost" ).click(function() {
+            $("#openForm").hide();
+            $( "#closeForm" ).show( 200 );
         });
     })   
 

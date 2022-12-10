@@ -111,7 +111,7 @@ class LoginController extends Controller
             // else{
             //     return redirect('/dashboard');
             // }
-            return view('beranda');
+            return redirect('/beranda');
         }
         else{
             return view('login');

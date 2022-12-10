@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 // use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\Teacher\ClassesController;
+use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
