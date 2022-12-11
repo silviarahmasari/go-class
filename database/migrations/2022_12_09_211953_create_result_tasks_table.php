@@ -16,8 +16,9 @@ class CreateResultTasksTable extends Migration
         Schema::create('result_tasks', function (Blueprint $table) {
             $table->bigInteger('task_id');
             $table->bigInteger('user_id');
-            $table->text('result_description');
-            $table->text('result_file');
+            $table->text('result_description')->nullable();
+            $table->text('result_file')->nullable();
+            $table->integer('result_score')->nullable();
             $table->timestamps();
         });
     }

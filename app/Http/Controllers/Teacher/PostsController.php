@@ -51,7 +51,7 @@ class PostsController extends Controller
 
             $posts->post_file = $fileName;
         }
-        
+
         $posts->class_id = $id;
         $posts->save();
 
@@ -60,8 +60,7 @@ class PostsController extends Controller
         $cp->user_id = Auth::user()->id;
         $cp->save();
         
-
-        return redirect('teacher/class/show/'.$id)->with('success', 'Post created successfully.');
+        return redirect('teacher/class/show/'.$id)->with('success', 'Postingan berhasil dibuat.');
     }
 
     /**

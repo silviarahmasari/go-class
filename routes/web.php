@@ -5,6 +5,7 @@ use App\Http\Controllers\UsersController;
 // use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\Teacher\ClassesController;
 use App\Http\Controllers\Teacher\PostsController;
+use App\Http\Controllers\Teacher\TasksController;
 use App\Http\Controllers\Student\StudentsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
@@ -39,7 +40,7 @@ Route::get('about', function () {
 });
 
 Route::get('services', function () {
-    return view('services');
+    return view('teachers.tasks.show');
 });
 // Route::get('teachers/dashboard', function () {
 //     return view('teachers.dashboard');
@@ -75,17 +76,25 @@ Route::middleware(['auth'])->group(function() {
     // Beranda
     Route::get('/beranda', [HomeController::class, 'index'])->name('beranda');
     
-    // Teacher Class
+    // CLass
     Route::get('class/index', [ClassesController::class, 'index'])->name('classes.index');
     Route::get('class/create', [ClassesController::class, 'create'])->name('classes.create');
     Route::post('class/store', [ClassesController::class, 'store'])->name('classes.store');
-    Route::get('teacher/class/show/{id}', [ClassesController::class, 'show'])->name('teacher.classes.show');
+    Route::get('class/show/{id}', [ClassesController::class, 'show'])->name('classes.show');
     Route::get('class/edit/{id}', [ClassesController::class, 'edit'])->name('classes.edit');
     Route::post('class/update/{id}', [ClassesController::class, 'update'])->name('classes.update');
     Route::get('class/destroy/{id}', [ClassesController::class, 'destroy'])->name('classes.destroy');
+    
+    // Teacher Class
+    Route::get('teacher/class/show/{id}', [ClassesController::class, 'show'])->name('teacher.classes.show');
 
-    // Teacher Post
+    // Teacher Posts
     Route::post('teacher/post/store/{id}', [PostsController::class, 'store'])->name('teacher.post.store');
+
+    // Teacher Tasks
+    Route::get('teacher/task/index/{id}', [TasksController::class, 'index'])->name('teacher.task.index');
+    Route::post('teacher/task/store/{id}', [TasksController::class, 'store'])->name('teacher.task.store');
+    Route::get('teacher/task/show/{id}/{id_task}', [TasksController::class, 'show'])->name('teacher.task.show');
     
     // Student
     Route::get('students/dashboard/{id}', [StudentsController::class, 'show'])->name('students.dashboard');

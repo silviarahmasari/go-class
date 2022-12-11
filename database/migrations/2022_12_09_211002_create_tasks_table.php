@@ -19,7 +19,7 @@ class CreateTasksTable extends Migration
             $table->bigInteger('task_created_by');
             $table->String('task_title');
             $table->text('task_description');
-            $table->text('task_file');
+            $table->text('task_file')->nullable();
             $table->timestamps();
         });
     }

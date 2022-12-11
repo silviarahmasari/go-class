@@ -13,7 +13,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route('teacher.task.index', $class[0]->class_id)}}">
                         <h5>Tugas Kelas</h5>
                     </a>
                 </li>
@@ -46,15 +46,15 @@
                             <form action="{{ route('teacher.post.store', $class[0]->class_id) }}" enctype="multipart/form-data" method="POST">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="post_title">Title</label>
+                                    <label for="post_title">Judul Post</label>
                                     <input id="post_title" class="form-control" type="text" name="post_title">
                                 </div>
                                 <div class="form-group">
-                                    <label for="post_description">Description</label>
+                                    <label for="post_description">Deskripsi Post</label>
                                     <textarea id="post_description" class="form-control" type="text" name="post_description"></textarea>
                                 </div>
                                 <div class="form-group">    
-                                    <label for="post_file">File</label>
+                                    <label for="post_file">Upload File</label>
                                     <input id="post_file" class="form-control" type="file" name="post_file">
                                 </div>    
                                 <div class="form-group">
@@ -71,7 +71,13 @@
                             <h5 class="card-title">{{ $post->post_title }}</h5>
                             <h6 class="card-subtitle  text-muted text-sm">oleh {{ $post->name }}</h6>
                             <p class="card-text">{{ $post->post_description }}</p>
-                            <a href="#" class="card-link">{{ $post->post_file }}</a>
+                            <a class="card-link" type="button" target="_blank">
+                                @if ($post->post_file != '')
+                                    <div class="card card-danger p-2 px-2">
+                                        <b class="text-primary"><li class="far fa-folder-open"></li> {{ $post->post_file }}</b>
+                                    </div>
+                                @endif
+                            </a>
                         </div>
                     </div>
                 @endforeach
