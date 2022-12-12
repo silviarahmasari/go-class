@@ -9,6 +9,7 @@ use App\Http\Controllers\Teacher\TasksController;
 use App\Http\Controllers\Teacher\ResultTasksController;
 use App\Http\Controllers\Teacher\ResultScoresController;
 use App\Http\Controllers\Student\StudentsController;
+use App\Http\Controllers\DownloadsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
@@ -113,4 +114,6 @@ Route::middleware(['auth'])->group(function() {
     Route::post('students/addresult/{id}', [StudentsController::class, 'uploadResults'])->name('add.result');
     Route::get('students/orang/{id}', [StudentsController::class, 'orang'])->name('students.orang');
     Route::get('{filepath}', [DownloadsController::class, 'download'])->name('download');
+    
+    Route::post('gabungkelas', [HomeController::class, 'gabungKelas'])->name('gabungkelas');
 });

@@ -93,4 +93,35 @@ class HomeController extends Controller
     {
         //
     }
+
+    public function gabungKelas(Request $request) 
+    {
+        $kode_kelas = DB::table('class')
+            ->select('class_code')
+            ->get();
+        $count = DB::table('class')
+            ->select('class_code')
+            ->count();
+
+        for ( $i=0; $i<=$count; $i++ ) {
+            if ($request->class_code == $kode_kelas[$i]->class_code) {
+                
+                $code = DB::table('class')
+                    ->select('id_class')
+                    ->where('class_code', $request->class_code)
+                    ->get();
+                
+                $cu = new ClassUsers;
+                $cu->class_id = $code[0]->id_class;
+                $cu->user_id = Auth::user()->id;
+                $cu->is_owner = 0;
+                $cu->save();
+
+                return redirect('beranda')->with('success', 'Berhasil gabung di kelas');
+            } else {
+                return redirect('beranda')->with('error', 'Periksa kode kelas Anda');
+            }
+        }
+
+    }
 }

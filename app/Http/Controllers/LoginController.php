@@ -90,12 +90,6 @@ class LoginController extends Controller
 
     public function preLogin(){
         if(Auth::check()){
-            // if(Auth::user()->role == 'admin'){
-            //     return redirect('/class/index');
-            // }
-            // else{
-            //     return redirect('/dashboard');
-            // }
         }
         else{
             return view('login');
@@ -105,12 +99,6 @@ class LoginController extends Controller
     public function postLogin(Request $request){
         $data = $request->only('email', 'password');
         if(Auth::attempt($data)){
-            // if(Auth::user()->role == 'admin'){
-            //     return redirect('/class/index');
-            // }
-            // else{
-            //     return redirect('/dashboard');
-            // }
             return redirect('/beranda');
         }
         else{
@@ -129,14 +117,12 @@ class LoginController extends Controller
         'email'=>'required|email|unique:users',
         'password'=>'required',
         'cpassword'=> 'required|same:password',
-        // 'role'=>'required'
      ]);
 
      User::create([
         'name'=>$request->name,
         'email'=>$request->email,
         'password'=> Hash::make($request->password),
-        // 'role'=>$request->role
      ]);
 
      return redirect('/');
