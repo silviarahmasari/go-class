@@ -8,7 +8,7 @@
     @yield('custom_css')
 </head>
 
-<body>
+<body class="sidebar-mini">
   <div id="app">
     <div class="main-wrapper">
       @include('layout/navbar')

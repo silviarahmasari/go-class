@@ -6,6 +6,8 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\Teacher\ClassesController;
 use App\Http\Controllers\Teacher\PostsController;
 use App\Http\Controllers\Teacher\TasksController;
+use App\Http\Controllers\Teacher\ResultTasksController;
+use App\Http\Controllers\Teacher\ResultScoresController;
 use App\Http\Controllers\Student\StudentsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
@@ -95,6 +97,12 @@ Route::middleware(['auth'])->group(function() {
     Route::get('teacher/task/index/{id}', [TasksController::class, 'index'])->name('teacher.task.index');
     Route::post('teacher/task/store/{id}', [TasksController::class, 'store'])->name('teacher.task.store');
     Route::get('teacher/task/show/{id}/{id_task}', [TasksController::class, 'show'])->name('teacher.task.show');
+
+    // Teacher Result Tasks
+    Route::get('teacher/resulttask/show/{id_user}/{id_task}', [ResultTasksController::class, 'show'])->name('teacher.resulttask.show');
+    
+    // Teacher Result Scores
+    Route::post('teacher/resultscore/store', [ResultTasksController::class, 'store'])->name('teacher.resultscore.store');
     
     // Student
     Route::get('students/dashboard/{id}', [StudentsController::class, 'show'])->name('students.dashboard');

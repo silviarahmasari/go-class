@@ -71,16 +71,28 @@ class TasksController extends Controller
      */
     public function show($id, $id_task)
     {
-        $results = DB::table('result_tasks as rt')
-                    ->join('tasks as t', 'rt.task_id', '=', 't.id')
-                    ->join('class as c', 't.class_id', '=', 'c.id_class')
-                    ->join('users as u', 'rt.user_id', '=', 'u.id')
-                    ->where('t.class_id', $id)
-                    ->where('t.id', $id_task)
-                    ->get();
-        // dd($results);            
+        $users = DB::table('users as u')
+                ->select('u.id as user_id', 'rt.task_id as task_id', 'u.name as name')
+                ->join('result_tasks as rt', 'rt.user_id', '=', 'u.id')
+                ->join('tasks as t', 'rt.task_id', '=', 't.id')
+                ->join('class as c', 't.class_id', '=', 'c.id_class')
+                ->where('t.class_id', $id)
+                ->where('t.id', $id_task)
+                ->groupBy('user_id', 'task_id', 'name')
+                ->get();
 
-        return view('teachers.tasks.show', compact('results'));       
+        // $results = DB::table('result_tasks as rt')
+        //             ->select('u.id')
+        //             ->join('tasks as t', 'rt.task_id', '=', 't.id')
+        //             ->join('class as c', 't.class_id', '=', 'c.id_class')
+        //             ->join('users as u', 'rt.user_id', '=', 'u.id')
+        //             ->where('t.class_id', $id)
+        //             ->where('t.id', $id_task)
+        //             ->groupBy('u.id')
+        //             ->get();
+        // dd($users);            
+
+        return view('teachers.tasks.show', compact('users'));       
     }
 
     /**
@@ -115,16 +127,5 @@ class TasksController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function getResults($id, $id_task) {
-        $results = DB::table('result_tasks as rt')
-                    ->join('tasks as t', 'rt.task_id', '=', 't.id')
-                    ->join('users as u', 'rt.user_id', '=', 'u.id')
-                    ->where('t.class_id', $id)
-                    ->where('t.id', $id_task)
-                    ->get();
-        
-        return response()->json;
     }
 }
