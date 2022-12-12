@@ -139,13 +139,13 @@ class LoginController extends Controller
         // 'role'=>$request->role
      ]);
 
-     return redirect('/login');
+     return redirect('/');
     }
 
     public function Logout()
     {
         Auth::logout();
-        return redirect('/login');
+        return redirect('/');
     }
 
 }

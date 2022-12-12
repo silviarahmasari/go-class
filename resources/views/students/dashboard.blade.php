@@ -70,7 +70,8 @@
                             <h5 class="card-title">{{ $post->post_title }}</h5>
                             <h6 class="card-subtitle text-muted text-sm">oleh {{ $post->name }}</h6>
                             <p class="card-text">{{ $post->post_description }}</p>
-                            <a class="card-link" type="button" target="_blank">
+                            
+                            <a class="card-link" type="button" target="_blank" href="{{ url('post_files/'. $post->post_file) }}">
                                 @if ($post->post_file != '')
                                     <div class="card card-danger p-2 px-2">
                                         <b class="text-primary"><li class="far fa-folder-open"></li> {{ $post->post_file }}</b>

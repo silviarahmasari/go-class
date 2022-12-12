@@ -18,14 +18,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // $class = Classes::all();
         $class = DB::table('class_users as cu')
                     ->select('*')
                     ->leftjoin('users as u', 'cu.user_id', '=', 'u.id')
                     ->leftjoin('class as c', 'cu.class_id', '=', 'c.id_class')
                     ->where('cu.user_id', '=', Auth::user()->id)
-                    ->get();
-        // dd($class[0]->is_owner);            
+                    ->get();           
 
         return view('beranda', compact('class'));
     }

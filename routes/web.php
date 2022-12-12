@@ -63,7 +63,7 @@ Route::get('services', function () {
 // Route::get('/login', [UsersController::class, 'index'])->name('login');
 // Route::post('/authenticate', [UsersController::class, 'authenticate'])->name('authenticate');
 // Route::get('/logout', [UsersController::class, 'logout'])->name('logout');
-Route::get('/login', [LoginController::class, 'preLogin'])->name('login');
+Route::get('/', [LoginController::class, 'preLogin'])->name('login');
 Route::post('/post_login', [LoginController::class, 'postLogin'])->name('post_login');
 Route::get('/register', [LoginController::class, 'preRegister'])->name('register');
 Route::post('/post_register', [LoginController::class, 'postRegister'])->name('post_register');
@@ -109,5 +109,8 @@ Route::middleware(['auth'])->group(function() {
     Route::post('students/dashboard/{id}', [StudentsController::class, 'store'])->name('students.insertposts');
     Route::get('students/tugaskelas/{id}', [StudentsController::class, 'tugasKelas'])->name('students.tugaskelas');
     Route::get('students/detailtugas/{id_task}', [StudentsController::class, 'detailTugas'])->name('students.detailtugas');
+    Route::get('students/detailtugas/{id}', [StudentsController::class, 'detailTugas'])->name('students.detailtugas');
+    Route::post('students/addresult/{id}', [StudentsController::class, 'uploadResults'])->name('add.result');
     Route::get('students/orang/{id}', [StudentsController::class, 'orang'])->name('students.orang');
+    Route::get('{filepath}', [DownloadsController::class, 'download'])->name('download');
 });

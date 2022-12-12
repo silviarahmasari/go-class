@@ -7,6 +7,7 @@ use App\Models\Tasks;
 use App\Models\ClassPosts;
 use App\Models\Posts;
 use App\Models\Classes;
+use App\Models\Result;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -126,23 +127,23 @@ class StudentsController extends Controller
             ->leftjoin('class as c', 't.class_id', '=', 'c.id_class')
             ->where('t.class_id', '=', $id)
             ->get();
-        // dd($kelas);
+        // dd($tugas);
 
         return view('students.tugaskelas', compact('tugas', 'kelas'));  
     }
 
     public function detailTugas($id) 
     {
-        $kelas = $id;
-        $tugas = DB::table('tasks as t')
-            ->select('*')
-            ->leftjoin('result_tasks as rt', 't.id', '=', 'rt.task_id')
-            ->leftjoin('users as u', 'u.id', '=', 't.task_created_by')
-            ->where('t.id', '=', $id)
+        $detail = DB::table('result_tasks as rt')
+            ->join('tasks as t', 'rt.task_id', '=', 't.id')
+            ->join('class as c', 't.class_id', '=', 'c.id_class')
+            ->join('users as u', 'rt.user_id', '=', 'u.id')
+            ->where('rt.user_id', Auth::user()->id)
+            ->where('t.id', $id)
             ->get();
-        // dd($tugas);
+        // dd($detail);
 
-        return view('students.detailtugas', compact('tugas', 'kelas'));
+        return view('students.detailtugas', compact('detail'));
     }
 
     public function orang($id)
@@ -163,4 +164,26 @@ class StudentsController extends Controller
 
         return view('students.detailorang', compact('users', 'kelas', 'count'));  
     }
+
+    public function uploadResults(Request $request, $id)
+    {
+        $kelas = $id;
+        $result = new Result();
+        if($file = $request->hasFile('result_file')) {
+            $file = $request->file('result_file') ;
+            $fileName = $file->getClientOriginalName() ;
+            $destinationPath = public_path().'/result_tasks' ;
+            $file->move($destinationPath,$fileName);
+
+            $result->result_file = $fileName;
+        }
+        $result->result_description = $request->result_description;
+        $result->task_id = $id;
+        $result->user_id = Auth::user()->id;
+        // dd($result);
+        $result->save();
+
+        return redirect('students/detailtugas/'.$id)->with('success', 'Class created successfully.');
+    }
+
 }
