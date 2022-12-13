@@ -124,4 +124,22 @@ class HomeController extends Controller
         }
 
     }
+
+    public function buatKelas(Request $request)
+    {
+        $class = new Classes;
+        $class->class_code = $request->class_code;
+        $class->class_name = $request->class_name;
+        $class->class_desc = $request->class_desc;
+        $class->save();
+        $class->id_class;
+        
+        $cu = new ClassUsers;
+        $cu->class_id = $class->id_class;
+        $cu->user_id = Auth::user()->id;
+        $cu->is_owner = 1;
+        $cu->save();
+
+        return redirect('beranda')->with('success', 'Berhasil buat kelas');
+    }
 }

@@ -8,7 +8,7 @@
     </a>
     <div class="dropdown-menu dropdown-menu-sm-right rounded-lg">
         <div class="">
-          <a href="#" class="dropdown-item dropdown-item-unread">
+          <a href="#" data-toggle="modal" data-target="#buatKelas" class="dropdown-item dropdown-item-unread">
               <h6>Buat Kelas</h6>
           </a>
           <a href="#" data-toggle="modal" data-target="#gabungKelas" class="dropdown-item dropdown-item-unread">
@@ -63,13 +63,50 @@
                         </article>
                     </a>
                 @endif 
-            </div>
+                </div>
             @endforeach
         @endif 
     </div>
 </body>
 @endsection
 
+{{-- Modal Buat Kelas --}}
+<div class="modal fade" tabindex="-2" role="dialog" id="buatKelas">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Buat Kelas</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container px-3 pt-2">
+                    <div class="card shadow-none">
+                        <form action="{{ route('buatkelas') }}" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <label>Kode Kelas</label>
+                                <input type="text" name="class_code" placeholder="Kode Kelas" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Nama Kelas</label>
+                                <input type="text" name="class_name" placeholder="Nama Kelas" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Deskripsi Kelas</label>
+                                <input type="text" name="class_desc" placeholder="Deskripsi Kelas" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-outline-dark">Buat Kelas</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- Modal Gabung Kelas --}}
 <div class="modal fade" tabindex="-1" role="dialog" id="gabungKelas">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -102,5 +139,4 @@
         </div>
       </div>
     </div>
-  </div>
 </div>

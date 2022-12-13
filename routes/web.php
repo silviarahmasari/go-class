@@ -116,4 +116,5 @@ Route::middleware(['auth'])->group(function() {
     Route::get('{filepath}', [DownloadsController::class, 'download'])->name('download');
     
     Route::post('gabungkelas', [HomeController::class, 'gabungKelas'])->name('gabungkelas');
+    Route::post('buatkelas', [HomeController::class, 'buatKelas'])->name('buatkelas');
 });
