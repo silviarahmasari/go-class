@@ -80,12 +80,12 @@ class TasksController extends Controller
                 ->where('t.id', $id_task)
                 ->groupBy('user_id', 'task_id', 'name')
                 // ->groupBy('u.id', 'rt.task_id', 'u.name')
-                ->get();         
+                ->get();
+                
+        return view('teachers.tasks.show', compact('users'));         
+    }  
 
-        return view('teachers.tasks.show', compact('users'));       
-    }
-
-    /**
+    /**                    
      * Show the form for editing the specified resource.
      *
      * @param  int  $id

@@ -67,6 +67,15 @@
                                 </div>
                                 <div class="card-body">
                                     {{ $data->result_description}}
+                                    <div class="container pt-3">
+                                        <a class="card-link" type="button" target="_blank" href="{{ url('result_tasks/'. $data->result_file) }}">
+                                            @if ($data->result_file != '')
+                                                <div class="card card-danger p-2 px-2">
+                                                    <b class="text-primary"><li class="far fa-folder-open"></li> {{ $data->result_file }}</b>
+                                                </div>
+                                            @endif
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             @endforeach

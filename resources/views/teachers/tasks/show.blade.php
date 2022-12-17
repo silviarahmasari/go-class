@@ -13,7 +13,7 @@
                             <h4 class="card-title">List Siswa</h4>
                             @foreach ($users as $data)
                             <div class="list-group" id="list-tab" role="tablist">
-                                <a href="#" onclick="getStudentResult({{ $data->user_id }}, {{ $data->task_id }})" class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" role="tab" aria-selected="false">{{ $data->name }}</a>
+                                <a href="#" onclick="getStudentResult({{ $data->user_id }}, {{ $data->task_id }})" class="btn btn-outline-primary">{{ $data->name }}</a>
                             </div>
                             @endforeach
                         </div>
@@ -24,7 +24,7 @@
                 <div class="card rounded-lg" >
                     <div class="card-body" >
                         <div class="container p-3">
-                            <div class="card" id="taskResult">
+                            <div class="card" id="taskResult">  
                             </div>
                         </div>
                     </div>
@@ -48,23 +48,33 @@
                 count = 1;
                 $("#taskResult").append(
                     $(`
-                    <a class="btn btn-icon btn-info" href="/teacher/resultscore/show/`+id_user+`/`+id_task+`">Lihat Nilai</i></a>
+                    <div class="col col-auto"><a class="btn btn-primary" href="/teacher/resultscore/show/`+id_user+`/`+id_task+`"><u>Lihat Nilai</u></i></a></div>
                     `)
                 );
 
                 $.each(response,function(key, response){
                     $("#taskResult").append(
-                        $(
-                            `<div class="card">
-                                <div class="card-header">
-                                    <h4>Jawaban ` + count + `</h4>
+                        $(`   
+                            <div class="card-header">
+                                <h4>Jawaban ` + count + `</h4>
+                            </div>
+                            <div class="card-body">`
+                                + response.result_description + 
+                                `<div class="container pt-3" id="resultFile`+key+`">
+                                    
                                 </div>
-                                <div class="card-body">`
-                                    + response.result_description +    
-                                `</div>
-                            </div>`
-                        )
+                            </div>
+                        `)
                     );
+                    if (response.result_file !== null) {
+                        $("#resultFile"+key).append(`
+                            <a class="card-link" type="button" target="_blank" href="{{ url('result_tasks/`+response.result_file+`') }}">
+                                <div class="card card-danger p-2 px-2">
+                                    <b class="text-primary"><li class="far fa-folder-open"></li>`+response.result_file+`</b>
+                                </div>
+                            </a>
+                        `);
+                    }
                 count++
                 })
             },
