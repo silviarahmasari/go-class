@@ -1,5 +1,5 @@
 @extends('layout.mainlayout')
-@section('title','Class')
+@section('title','People Details')
 @section('PWBF','')
 
 @section('content')
@@ -34,11 +34,9 @@
                         <div class="col col-auto">
                             <img alt="image" src="{{ asset('assets/stisla/img/avatar/avatar-1.png') }}" class="rounded-circle mr-1" style="width: 25px; height:25px">
                         </div>
-                        @if ($users[0]->is_owner == 1)
-                            <div class="col col-10">
-                                <h5>{{ $users[0]->name }}</h5>
-                            </div>
-                        @endif
+                        <div class="col col-10">
+                            <h5>{{ $teacher[0]->name }}</h5>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
@@ -51,16 +49,16 @@
                         </div>
                     </div>
                     <hr>
-                    <div class="row pl-4">
+                    @foreach ($student as $siswa)
+                    <div class="row pl-4 p-1">
                         <div class="col col-auto">
                             <img alt="image" src="{{ asset('assets/stisla/img/avatar/avatar-2.png') }}" class="rounded-circle mr-1" style="width: 25px; height:25px">
                         </div>
-                        @if ($users[0]->is_owner == 0)
                         <div class="col col-10">
-                            <h5>{{ $users[0]->name }}</h5>
+                            <h5>{{ $siswa->name }}</h5>
                         </div>
-                        @endif
                     </div>
+                    @endforeach
                 </div>
             </div>
         </div>

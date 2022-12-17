@@ -1,5 +1,5 @@
 @extends('layout.mainlayout')
-@section('title','Class')
+@section('title','Tasks')
 @section('PWBF','')
 
 @section('content')

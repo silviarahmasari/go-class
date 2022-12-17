@@ -1,5 +1,5 @@
 @extends('layout.mainlayout')
-@section('title','Class')
+@section('title','Detail Orang')
 @section('PWBF','')
 
 @section('content')
@@ -34,11 +34,9 @@
                         <div class="col col-auto">
                             <img alt="image" src="{{ asset('assets/stisla/img/avatar/avatar-1.png') }}" class="rounded-circle mr-1" style="width: 25px; height:25px">
                         </div>
-                        @if ($teacher[0]->is_owner == 1)
-                            <div class="col col-10">
-                                <h5>{{ $teacher[0]->name }}</h5>
-                            </div>
-                        @endif
+                        <div class="col col-10">
+                            <h5>{{ $teacher[0]->name }}</h5>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">

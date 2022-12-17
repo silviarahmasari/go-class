@@ -1,5 +1,5 @@
 @extends('layout.mainlayout')
-@section('title','Kelas')
+@section('title','Beranda')
 @section('PWBF','')
 @section('beranda')
 <li class="dropdown dropdown-list-toggle">

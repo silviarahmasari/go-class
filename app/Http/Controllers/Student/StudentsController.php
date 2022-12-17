@@ -149,10 +149,18 @@ class StudentsController extends Controller
     public function orang($id)
     {
         $kelas = $id;
-        $users = DB::table('class_users as cu')
+        $teacher = DB::table('class_users as cu')
             ->select('*')
             ->leftjoin('users as u', 'cu.user_id', '=', 'u.id')
             ->where('cu.class_id', '=', $id)
+            ->where('cu.is_owner', '=', 1)
+            ->get();
+        // dd($teacher); 
+        $student = DB::table('class_users as cu')
+            ->select('*')
+            ->leftjoin('users as u', 'cu.user_id', '=', 'u.id')
+            ->where('cu.class_id', '=', $id)
+            ->where('cu.is_owner', '=', 0)
             ->get();
         $count = DB::table('class_users as cu')
             ->select('*')
@@ -162,7 +170,7 @@ class StudentsController extends Controller
             ->count();
         // dd($users);
 
-        return view('students.detailorang', compact('users', 'kelas', 'count'));  
+        return view('students.detailorang', compact('teacher','student', 'kelas', 'count'));  
     }
 
     public function uploadResults(Request $request, $id)

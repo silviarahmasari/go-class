@@ -115,6 +115,7 @@ class ClassesController extends Controller
             ->select('*')
             ->leftjoin('users as u', 'cu.user_id', '=', 'u.id')
             ->where('cu.class_id', '=', $id)
+            ->where('cu.is_owner', '=', 1)
             ->get();
         $student = DB::table('class_users as cu')
             ->select('*')
