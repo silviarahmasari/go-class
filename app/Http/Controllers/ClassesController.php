@@ -110,7 +110,7 @@ class ClassesController extends Controller
      * @param  \App\Models\Classes  $classes
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Classes $classes, $id)
+    public function update(Request $request, $id)
     {
         $classes = Classes::find($id);
         $classes->user_id = session('LoggedUser');

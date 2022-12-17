@@ -141,5 +141,5 @@ class HomeController extends Controller
         $cu->save();
 
         return redirect('beranda')->with('success', 'Berhasil buat kelas');
-    }
+    } 
 }
