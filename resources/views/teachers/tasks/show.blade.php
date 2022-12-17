@@ -21,30 +21,13 @@
                 </div>
             {{-- @endforeach --}}
             <div class="col col-8 pt-2">
-                <div class="card rounded-lg">
-                    <div class="card-body">
+                <div class="card rounded-lg" >
+                    <div class="card-body" >
                         <div class="container p-3">
                             <div class="card" id="taskResult">
-                                {{-- <div class="card-header">
-                                    <h4 id="title"></h4>
-                                    <div class="card-header-action">
-                                        <a data-collapse="#mycard-collapse" class="btn btn-icon btn-info" href="#"><i class="fas fa-minus"></i></a>
-                                    </div>
-                                </div>
-                                <div class="collapse show" id="mycard-collapse" style="">
-                                    <div class="card-body">
-                                    </div>
-                                </div> --}}
                             </div>
                         </div>
-                    </div>        
-                    {{-- <div class="card-body">
-                        <div class="container p-3">
-                            <h4>Jawaban Siswa</h4>
-                            <label for="result_description">Deskripsi Jawaban</label>
-                            <div id="taskResult"></div>
-                        </div>
-                    </div> --}}
+                    </div>
                 </div>
             </div>
         </div>
@@ -52,55 +35,24 @@
 </div>
 @endsection
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script> 
     function getStudentResult(id_user, id_task) {
         $("#taskResult").load(window.location.href + " #taskResult" );
-        console.log(id_user + ' ' + id_task);
         $.ajax({
             url: "/teacher/resulttask/show/" + id_user + "/" + id_task,
             type: "GET",
             dataType: 'json',
             success: function(response){
-                // console.log(response);
+                console.log(response);
+                
                 count = 1;
                 $("#taskResult").append(
                     $(`
-                        <div id="closeForm">
-                            <button class="btn btn-primary" id="newPost">Nilai</button>
-                        </div>    
-                        <div id="openForm">
-                            <form action="{{ route('teacher.resultscore.store') }}" method="POST">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="result_score">Masukkan Nilai</label>
-                                    <input id="result_score" class="form-control" type="text" name="result_score">
-                                    <input id="user_id" class="form-control" type="hidden" name="user_id" value="`+ response[0].user_id +`">
-                                    <input id="task_id" class="form-control" type="hidden" name="task_id" value="`+ response[0].task_id +`">
-                                </div>  
-                                <div class="form-group">
-                                    <a class="btn btn-secondary" id="cancelPost">batal</a>
-                                    <button class="btn btn-success">simpan</button>
-                                </div>
-                            </form>    
-                        </div>  
+                    <a class="btn btn-icon btn-info" href="/teacher/resultscore/show/`+id_user+`/`+id_task+`">Lihat Nilai</i></a>
                     `)
                 );
-                
-                $("#openForm").hide();
-
-                $( "#newPost" ).click(function() {
-                    $("#closeForm").hide();
-                    $( "#openForm" ).show( 500 );
-                });
-
-                $( "#cancelPost" ).click(function() {
-                    $("#openForm").hide();
-                    $( "#closeForm" ).show( 200 );
-                });
 
                 $.each(response,function(key, response){
-                    // console.log(response.result_description);
                     $("#taskResult").append(
                         $(
                             `<div class="card">
@@ -115,11 +67,11 @@
                     );
                 count++
                 })
-                // $("#bodyData").append(bodyData);
             },
             error: function(xhr, status, error) {
                 alert(error);
             }
+            
         });
     }
 </script>

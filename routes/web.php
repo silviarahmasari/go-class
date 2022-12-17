@@ -103,7 +103,8 @@ Route::middleware(['auth'])->group(function() {
     Route::get('teacher/resulttask/show/{id_user}/{id_task}', [ResultTasksController::class, 'show'])->name('teacher.resulttask.show');
     
     // Teacher Result Scores
-    Route::post('teacher/resultscore/store', [ResultTasksController::class, 'store'])->name('teacher.resultscore.store');
+    Route::get('teacher/resultscore/show/{id_user}/{id_task}', [ResultScoresController::class, 'show'])->name('teacher.resultscore.show');
+    Route::post('teacher/resultscore/store/{id_user}/{id_task}', [ResultScoresController::class, 'store'])->name('teacher.resultscore.store');
     
     // Student
     Route::get('students/dashboard/{id}', [StudentsController::class, 'show'])->name('students.dashboard');

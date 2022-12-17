@@ -79,18 +79,7 @@ class TasksController extends Controller
                 ->where('t.class_id', $id)
                 ->where('t.id', $id_task)
                 ->groupBy('user_id', 'task_id', 'name')
-                ->get();
-
-        // $results = DB::table('result_tasks as rt')
-        //             ->select('u.id')
-        //             ->join('tasks as t', 'rt.task_id', '=', 't.id')
-        //             ->join('class as c', 't.class_id', '=', 'c.id_class')
-        //             ->join('users as u', 'rt.user_id', '=', 'u.id')
-        //             ->where('t.class_id', $id)
-        //             ->where('t.id', $id_task)
-        //             ->groupBy('u.id')
-        //             ->get();
-        // dd($users);            
+                ->get();         
 
         return view('teachers.tasks.show', compact('users'));       
     }

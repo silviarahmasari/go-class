@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Tasks;
 use App\Models\ResultScores;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class ResultScoresController extends Controller
@@ -35,16 +37,16 @@ class ResultScoresController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id_user, $id_task)
     {
         $score = new ResultScores;
-        $score->user_id = $request->user_id;
-        $score->task_id = $request->task_id;
+        $score->user_id = $id_user;
+        $score->task_id = $id_task;
         $score->result_score = $request->result_score;
         $score->result_score_created_by = Auth::user()->id;
         $score->save();
 
-        dd($score);
+        return redirect("teacher/resultscore/show/".$id_user."/".$id_task);
     }
 
     /**
@@ -53,9 +55,24 @@ class ResultScoresController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id_user, $id_task)
     {
-        //
+        $user = DB::table('users')
+                    ->where('id', $id_user)
+                    ->get();
+                  
+        $score = ResultScores::where('task_id', $id_task)
+                            ->where('user_id', $id_user)
+                            ->get();            
+
+        $results = DB::table('result_tasks as rt')
+                    ->join('users as u', 'u.id', '=', 'rt.user_id')
+                    ->where('rt.user_id', $id_user)
+                    ->where('rt.task_id', $id_task)
+                    ->get();
+        // dd($user);            
+
+        return view('teachers.scores.show', compact('results', 'user', 'score'));
     }
 
     /**
