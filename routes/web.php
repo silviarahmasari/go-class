@@ -105,6 +105,9 @@ Route::middleware(['auth'])->group(function() {
     // Teacher Result Scores
     Route::get('teacher/resultscore/show/{id_user}/{id_task}', [ResultScoresController::class, 'show'])->name('teacher.resultscore.show');
     Route::post('teacher/resultscore/store/{id_user}/{id_task}', [ResultScoresController::class, 'store'])->name('teacher.resultscore.store');
+
+    // Teacher Orang
+    Route::get('teacher/orang/{id}', [ClassesController::class, 'orang'])->name('teacher.orang');
     
     // Student
     Route::get('students/dashboard/{id}', [StudentsController::class, 'show'])->name('students.dashboard');
