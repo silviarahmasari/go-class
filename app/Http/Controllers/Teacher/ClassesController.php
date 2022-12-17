@@ -42,8 +42,9 @@ class ClassesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
+    
 
     /**
      * Display the specified resource.
@@ -93,7 +94,7 @@ class ClassesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**
@@ -105,5 +106,30 @@ class ClassesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function orang($id)
+    {
+        $kelas = $id;
+        $teacher = DB::table('class_users as cu')
+            ->select('*')
+            ->leftjoin('users as u', 'cu.user_id', '=', 'u.id')
+            ->where('cu.class_id', '=', $id)
+            ->get();
+        $student = DB::table('class_users as cu')
+            ->select('*')
+            ->leftjoin('users as u', 'cu.user_id', '=', 'u.id')
+            ->where('cu.class_id', '=', $id)
+            ->where('cu.is_owner', '=', 0)
+            ->get();
+        $count = DB::table('class_users as cu')
+            ->select('*')
+            ->leftjoin('users as u', 'cu.user_id', '=', 'u.id')
+            ->where('cu.class_id', '=', $id)
+            ->where('cu.is_owner', '=', 0)
+            ->count();
+        // dd($users);
+
+        return view('teachers.detailorang', compact('teacher','student', 'kelas', 'count'));  
     }
 }

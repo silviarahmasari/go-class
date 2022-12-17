@@ -43,7 +43,7 @@
                                 <p>{{ $data->class_desc}} </p>
                                 <hr>
                                 <div class="container p-1 pb-3">
-                                    <a href="#"  data-toggle="modal" data-target="#editKelas" title="Edit"><li class="fas fa-edit" style="position: absolute; right: 6%"></li></a>
+                                    <a href="#" data-toggle="modal" data-target="#editKelas" title="Edit Kelas"><li class="fas fa-edit" style="position: absolute; right: 6%"></li></a>
                                 </div>
                             </div>
                         </article>
@@ -60,14 +60,12 @@
                             <div class="article-details">
                                 <p>{{ $data->class_desc}} </p>
                                 <hr>
-                                <div class="container p-1 pb-3">
-                                    <a href="#" data-toggle="modal" data-target="#editKelas" title="Edit"><li class="fas fa-edit" style="position: absolute; right: 6%"></li></a>
-                                </div>
                             </div>
                         </article>
                     </a>
                 @endif 
                 </div>
+                
             @endforeach
         @endif 
     </div>
@@ -111,35 +109,34 @@
 </div>
 
 {{-- Modal Edit Kelas --}}
+@foreach ($class as $data)
 <div class="modal fade" tabindex="-2" role="dialog" id="editKelas">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Edit Kelas</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
+                <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="container px-3 pt-2">
                     <div class="card shadow-none">
-                        <form action="{{ route('editkelas') }}" method="POST">
+                        <form action="{{ route('editkelas', $data->class_id) }}" method="POST">
                             @csrf
-                            @foreach ($classes as $class)
                                 <div class="form-group">
                                     <label>Kode Kelas</label>
-                                    <input type="text" name="class_code" placeholder="Kode Kelas" class="form-control" readonly>
+                                    <input type="text" name="class_code" placeholder="Kode Kelas" class="form-control" value="{{ $data->class_code }}" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label>Nama Kelas</label>
-                                    <input type="text" name="class_name" placeholder="Nama Kelas" class="form-control">
+                                    <input type="text" name="class_name" placeholder="Nama Kelas" class="form-control" value="{{ $data->class_name }}">
                                 </div>
                                 <div class="form-group">
                                     <label>Deskripsi Kelas</label>
-                                    <input type="text" name="class_desc" placeholder="Deskripsi Kelas" class="form-control">
+                                    <input type="text" name="class_desc" placeholder="Deskripsi Kelas" class="form-control" value="{{ $data->class_desc }}">
                                 </div>
-                            @endforeach
-                            <button type="submit" class="btn btn-outline-dark">Buat Kelas</button>
+                                <button type="submit" class="btn btn-outline-dark">Simpan Perubahan</button>
                         </form>
                     </div>
                 </div>
@@ -147,6 +144,7 @@
         </div>
     </div>
 </div>
+@endforeach
 
 {{-- Modal Gabung Kelas --}}
 <div class="modal fade" tabindex="-1" role="dialog" id="gabungKelas">

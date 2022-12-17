@@ -18,7 +18,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route('teacher.orang', $class[0]->class_id) }}">
                         <h5>Orang</h5>
                     </a>
                 </li>
@@ -37,10 +37,10 @@
                 </div>
             </div>
             <div class="col col-9 pt-4">
-                <div class="card rounded-lg">
+                <div class="card rounded-lg shadow-primary">
                     <div class="card-body">
                         <div id="closeForm">
-                            <a type="button" class="text-primary" id="newPost">Umumkan sesuatu untuk kelas Anda</a>
+                            <a type="button" class="text-primary" id="newPost"><h5>Umumkan sesuatu untuk kelas Anda</h5></a>
                         </div>    
                         <div id="openForm">
                             <form action="{{ route('teacher.post.store', $class[0]->class_id) }}" enctype="multipart/form-data" method="POST">

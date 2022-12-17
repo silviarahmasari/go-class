@@ -13,12 +13,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('teacher.classes.show', $id) }}">
+                    <a class="nav-link" href="{{ route('teacher.task.index', $id) }}">
                         <h5>Tugas Kelas</h5>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('teacher.classes.show', $id) }}">
+                    <a class="nav-link" href="{{ route('teacher.orang', $id) }}">
                         <h5>Orang</h5>
                     </a>
                 </li>

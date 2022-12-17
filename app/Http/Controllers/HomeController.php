@@ -142,4 +142,13 @@ class HomeController extends Controller
 
         return redirect('beranda')->with('success', 'Berhasil buat kelas');
     } 
+
+    public function editKelas(Request $request, $id) {
+        $class = Classes::find($id);
+        $class->class_name = $request->class_name;
+        $class->class_desc = $request->class_desc;
+        $class->save();
+
+        return redirect()->back();
+    }
 }
