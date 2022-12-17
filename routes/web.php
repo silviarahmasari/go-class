@@ -57,38 +57,25 @@ Route::get('services', function () {
 //     return view('dashboard');
 // });
 
-
 // Route::get('register', [UsersController::class, 'register'])->name('register');
 // Route::post('register', [UsersController::class, 'register_action'])->name('register.action');
 
 // Route::get('/login', [UsersController::class, 'index'])->name('login');
 // Route::post('/authenticate', [UsersController::class, 'authenticate'])->name('authenticate');
 // Route::get('/logout', [UsersController::class, 'logout'])->name('logout');
+
 Route::get('/', [LoginController::class, 'preLogin'])->name('login');
 Route::post('/post_login', [LoginController::class, 'postLogin'])->name('post_login');
 Route::get('/register', [LoginController::class, 'preRegister'])->name('register');
 Route::post('/post_register', [LoginController::class, 'postRegister'])->name('post_register');
 Route::get('/logout', [LoginController::class, 'Logout'])->name('logout');
 
-
-// Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::middleware(['auth'])->group(function() {
+
     // Beranda
     Route::get('/beranda', [HomeController::class, 'index'])->name('beranda');
     
-    // CLass
-    Route::get('class/index', [ClassesController::class, 'index'])->name('classes.index');
-    Route::get('class/create', [ClassesController::class, 'create'])->name('classes.create');
-    Route::post('class/store', [ClassesController::class, 'store'])->name('classes.store');
-    Route::get('class/show/{id}', [ClassesController::class, 'show'])->name('classes.show');
-    Route::get('class/edit/{id}', [ClassesController::class, 'edit'])->name('classes.edit');
-    Route::post('class/update/{id}', [ClassesController::class, 'update'])->name('classes.update');
-    Route::get('class/destroy/{id}', [ClassesController::class, 'destroy'])->name('classes.destroy');
-    
-    // Teacher Class
+    // Teacher Dashboard
     Route::get('teacher/class/show/{id}', [ClassesController::class, 'show'])->name('teacher.classes.show');
 
     // Teacher Posts
@@ -109,17 +96,33 @@ Route::middleware(['auth'])->group(function() {
     // Teacher Orang
     Route::get('teacher/orang/{id}', [ClassesController::class, 'orang'])->name('teacher.orang');
     
-    // Student
+    // Student Dashboard
     Route::get('students/dashboard/{id}', [StudentsController::class, 'show'])->name('students.dashboard');
+
+    // Student Posts
     Route::post('students/dashboard/{id}', [StudentsController::class, 'store'])->name('students.insertposts');
+
+    //  Student Tasks
     Route::get('students/tugaskelas/{id}', [StudentsController::class, 'tugasKelas'])->name('students.tugaskelas');
+
+    // Student Task Details
     Route::get('students/detailtugas/{id_task}', [StudentsController::class, 'detailTugas'])->name('students.detailtugas');
     Route::get('students/detailtugas/{id}', [StudentsController::class, 'detailTugas'])->name('students.detailtugas');
     Route::post('students/addresult/{id}', [StudentsController::class, 'uploadResults'])->name('add.result');
+
+    // Student Orang
     Route::get('students/orang/{id}', [StudentsController::class, 'orang'])->name('students.orang');
+
+    // Download
     Route::get('{filepath}', [DownloadsController::class, 'download'])->name('download');
     
+    // Gabung Kelas
     Route::post('gabungkelas', [HomeController::class, 'gabungKelas'])->name('gabungkelas');
-    Route::post('buatkelas', [HomeController::class, 'buatKelas'])->name('buatkelas');
+
+    // Edit Kelas
     Route::post('editkelas/{id}', [HomeController::class, 'editKelas'])->name('editkelas');
+
+    // Buat Kelas
+    Route::post('buatkelas', [HomeController::class, 'buatKelas'])->name('buatkelas');
+
 });
