@@ -25,12 +25,12 @@
                                     <table class="table table-striped">
                                         <tbody>
                                             <tr>
-                                                <th scope="col" class="col col-6">Nama</th>
-                                                <th scope="col" class="col col-6">{{ $user[0]->name }}</th>
+                                                <th>Nama</th>
+                                                <th>{{ $user[0]->name }}</th>
                                             </tr>
                                             <tr>
-                                                <th scope="col" class="col col-6">Email</th>
-                                                <th scope="col" class="col col-6">{{ $user[0]->email }}</th>
+                                                <th>Email</th>
+                                                <th>{{ $user[0]->email }}</th>
                                             </tr>
                                         </tbody>
                                     </table>

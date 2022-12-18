@@ -85,6 +85,7 @@ Route::middleware(['auth'])->group(function() {
     Route::get('teacher/task/index/{id}', [TasksController::class, 'index'])->name('teacher.task.index');
     Route::post('teacher/task/store/{id}', [TasksController::class, 'store'])->name('teacher.task.store');
     Route::get('teacher/task/show/{id}/{id_task}', [TasksController::class, 'show'])->name('teacher.task.show');
+    Route::post('teacher/task/update/{id}/{id_task}', [TasksController::class, 'update'])->name('teacher.task.update');
 
     // Teacher Result Tasks
     Route::get('teacher/resulttask/show/{id_user}/{id_task}', [ResultTasksController::class, 'show'])->name('teacher.resulttask.show');

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Tasks;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File; 
 
 class TasksController extends Controller
 {
@@ -81,8 +82,14 @@ class TasksController extends Controller
                 ->groupBy('user_id', 'task_id', 'name')
                 // ->groupBy('u.id', 'rt.task_id', 'u.name')
                 ->get();
+        
+        $task = DB::table('tasks as t')
+                ->where('t.class_id', $id)
+                ->where('t.id', $id_task)
+                ->get();
+        // dd($task);        
                 
-        return view('teachers.tasks.show', compact('users'));         
+        return view('teachers.tasks.show', compact('users', 'task'));         
     }  
 
     /**                    
@@ -103,10 +110,27 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, $id_task)
     {
-        //
-    }
+        $tasks = Tasks::find($id_task);
+        $tasks->task_title = $request->task_title;
+        $tasks->task_description = $request->task_description;
+
+        if($file = $request->hasFile('task_file')) {
+            $task_path = public_path("task_files/$tasks->task_file");
+            unlink($task_path);
+            $file = $request->file('task_file') ;
+            $fileName = $file->getClientOriginalName() ;
+            $destinationPath = public_path().'/task_files' ;
+            $file->move($destinationPath,$fileName);
+
+            $tasks->task_file = $fileName;
+        }
+
+        $tasks->save();
+
+        return redirect()->back();
+        }
 
     /**
      * Remove the specified resource from storage.
