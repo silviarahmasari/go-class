@@ -134,6 +134,8 @@ class StudentsController extends Controller
 
     public function detailTugas($id) 
     {
+        $task = Tasks::find($id);
+
         $detail = DB::table('result_tasks as rt')
             ->join('tasks as t', 'rt.task_id', '=', 't.id')
             ->join('class as c', 't.class_id', '=', 'c.id_class')
@@ -143,7 +145,7 @@ class StudentsController extends Controller
             ->get();
         // dd($detail);
 
-        return view('students.detailtugas', compact('detail'));
+        return view('students.detailtugas', compact('detail', 'task'));
     }
 
     public function orang($id)
